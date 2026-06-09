@@ -4,27 +4,27 @@
 # --------------------------BACKEND--------------------------
 
 # Logs generados en tiempo de ejecución.
-/log/*
-!/log/.keep
+/backend/log/*
+!/backend/log/.keep
 
 # Archivos temporales (caché, PIDs del servidor, etc.).
-/tmp/*
-!/tmp/.keep
-/tmp/pids/*
-!/tmp/pids/.keep
+/backend/tmp/*
+!/backend/tmp/.keep
+/backend/tmp/pids/*
+!/backend/tmp/pids/.keep
 
 # Base de datos SQLite (cada quien la regenera con rails db:setup).
-/storage/*
-!/storage/.keep
-/db/*.sqlite3
-/db/*.sqlite3-*
+/backend/storage/*
+!/backend/storage/.keep
+/backend/db/*.sqlite3
+/backend/db/*.sqlite3-*
 
 # Variables de entorno y secretos locales.
-/config/master.key
+/backend/config/master.key
 .env*
 
 # Caché de bootsnap.
-/tmp/cache/bootsnap*
+/backend/tmp/cache/bootsnap*
 
 # Claude
 /.claude
