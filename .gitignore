@@ -30,7 +30,7 @@
 /.claude
 
 # Documentacion
-/docs/architecure.md
+/docs/architecture.md
 /docs/database-design.md
 /docs/decisions.md
 /docs/domain-model.md
