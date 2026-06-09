@@ -1,0 +1,39 @@
+# Archivos y carpetas que NO se suben a git porque se generan en cada máquina.
+# Ver https://help.github.com/articles/ignoring-files para más info.
+
+# --------------------------BACKEND--------------------------
+
+# Logs generados en tiempo de ejecución.
+/log/*
+!/log/.keep
+
+# Archivos temporales (caché, PIDs del servidor, etc.).
+/tmp/*
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# Base de datos SQLite (cada quien la regenera con rails db:setup).
+/storage/*
+!/storage/.keep
+/db/*.sqlite3
+/db/*.sqlite3-*
+
+# Variables de entorno y secretos locales.
+/config/master.key
+.env*
+
+# Caché de bootsnap.
+/tmp/cache/bootsnap*
+
+# Claude
+/.claude
+
+# Documentacion
+/docs/architecure.md
+/docs/database-design.md
+/docs/decisions.md
+/docs/domain-model.md
+/docs/requirements.md
+
+# --------------------------FRONTEND--------------------------

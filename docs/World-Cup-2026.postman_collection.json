@@ -1,0 +1,244 @@
+{
+  "info": {
+    "name": "World Cup 2026 API",
+    "description": "Colección de la API REST de la Copa Mundial FIFA 2026 (Rails 7.1, modo API).\n\nVariables de entorno usadas:\n- baseUrl: http://localhost:3000\n- matchId, groupId, teamId: IDs de recursos para las rutas con :id\n\nLevantar el backend con:  bin/rails server  (puerto 3000)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000", "type": "string" },
+    { "key": "matchId", "value": "1", "type": "string" },
+    { "key": "groupId", "value": "1", "type": "string" },
+    { "key": "teamId", "value": "1", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/up", "host": ["{{baseUrl}}"], "path": ["up"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tournament",
+      "item": [
+        {
+          "name": "Estado del torneo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/tournament", "host": ["{{baseUrl}}"], "path": ["api", "v1", "tournament"] }
+          }
+        },
+        {
+          "name": "Avanzar de fase",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/tournament/advance", "host": ["{{baseUrl}}"], "path": ["api", "v1", "tournament", "advance"] },
+            "description": "group_stage -> knockout (genera dieciseisavos); knockout -> crea la siguiente ronda."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Groups",
+      "item": [
+        {
+          "name": "Listar grupos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/groups", "host": ["{{baseUrl}}"], "path": ["api", "v1", "groups"] }
+          }
+        },
+        {
+          "name": "Ver grupo (con partidos)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/groups/{{groupId}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "groups", "{{groupId}}"] }
+          }
+        },
+        {
+          "name": "Crear grupo",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"group\": {\n    \"name\": \"M\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/groups", "host": ["{{baseUrl}}"], "path": ["api", "v1", "groups"] }
+          }
+        },
+        {
+          "name": "Actualizar grupo",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"group\": {\n    \"name\": \"N\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/groups/{{groupId}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "groups", "{{groupId}}"] }
+          }
+        },
+        {
+          "name": "Eliminar grupo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/groups/{{groupId}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "groups", "{{groupId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Teams",
+      "item": [
+        {
+          "name": "Listar equipos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/teams", "host": ["{{baseUrl}}"], "path": ["api", "v1", "teams"] }
+          }
+        },
+        {
+          "name": "Ver equipo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/teams/{{teamId}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "teams", "{{teamId}}"] }
+          }
+        },
+        {
+          "name": "Crear equipo",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"team\": {\n    \"name\": \"Nueva Selección\",\n    \"group_id\": {{groupId}}\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/teams", "host": ["{{baseUrl}}"], "path": ["api", "v1", "teams"] }
+          }
+        },
+        {
+          "name": "Actualizar equipo",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"team\": {\n    \"name\": \"Nombre Editado\"\n  }\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/teams/{{teamId}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "teams", "{{teamId}}"] }
+          }
+        },
+        {
+          "name": "Eliminar equipo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/teams/{{teamId}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "teams", "{{teamId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Matches",
+      "item": [
+        {
+          "name": "Listar partidos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/matches?phase=group&status=scheduled",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "matches"],
+              "query": [
+                { "key": "phase", "value": "group", "description": "group | r32 | r16 | qf | sf | 3rd | final" },
+                { "key": "status", "value": "scheduled", "description": "scheduled | played" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Registrar resultado (grupos)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"home_goals\": 2,\n  \"away_goals\": 1\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/matches/{{matchId}}/result", "host": ["{{baseUrl}}"], "path": ["api", "v1", "matches", "{{matchId}}", "result"] },
+            "description": "Fase de grupos: solo home_goals y away_goals (no admite prórroga ni penales)."
+          }
+        },
+        {
+          "name": "Registrar resultado (eliminatoria con penales)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"home_goals\": 1,\n  \"away_goals\": 1,\n  \"home_penalties\": 4,\n  \"away_penalties\": 3\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/matches/{{matchId}}/result", "host": ["{{baseUrl}}"], "path": ["api", "v1", "matches", "{{matchId}}", "result"] },
+            "description": "Eliminatoria: si hay empate, se define por penales (home_penalties / away_penalties)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Knockout",
+      "item": [
+        {
+          "name": "Bracket eliminatorio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/knockout/bracket", "host": ["{{baseUrl}}"], "path": ["api", "v1", "knockout", "bracket"] }
+          }
+        },
+        {
+          "name": "Clasificados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/knockout/qualifiers", "host": ["{{baseUrl}}"], "path": ["api", "v1", "knockout", "qualifiers"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Simulations",
+      "item": [
+        {
+          "name": "Simular un partido",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/simulations/match/{{matchId}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "simulations", "match", "{{matchId}}"] }
+          }
+        },
+        {
+          "name": "Simular un grupo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/simulations/group/{{groupId}}", "host": ["{{baseUrl}}"], "path": ["api", "v1", "simulations", "group", "{{groupId}}"] }
+          }
+        },
+        {
+          "name": "Simular todos los grupos",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/simulations/groups", "host": ["{{baseUrl}}"], "path": ["api", "v1", "simulations", "groups"] }
+          }
+        },
+        {
+          "name": "Simular torneo completo",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/api/v1/simulations/tournament", "host": ["{{baseUrl}}"], "path": ["api", "v1", "simulations", "tournament"] },
+            "description": "Simula grupos, eliminatorias y final. Deja el torneo en estado 'finished'."
+          }
+        }
+      ]
+    }
+  ]
+}
