@@ -1,0 +1,14 @@
+source "https://rubygems.org"
+
+ruby "4.0.5"
+
+gem "rails", "~> 7.1.5"
+gem "puma", ">= 5.0"
+gem "tailwindcss-rails"
+gem "sprockets-rails"
+gem "bootsnap", require: false
+gem "tzinfo-data", platforms: %i[ mswin x64_mingw jruby ]
+
+group :development, :test do
+  gem "debug", platforms: %i[ mri mswin ]
+end
