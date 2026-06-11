@@ -1,1 +1,93 @@
-<%# Dashboard — estado del torneo, campeón, accesos rápidos %>
+<%# Dashboard — estado general del torneo %>
+
+<%# Hero %>
+<div style="text-align:center;padding:18px 0 36px;">
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;">
+    <span style="font-family:'Press Start 2P',monospace;font-size:9px;color:#000;background:#16A34A;padding:7px 10px;border-radius:3px">MÉXICO</span>
+    <span style="font-family:'Press Start 2P',monospace;font-size:9px;color:#000;background:#FFD400;padding:7px 10px;border-radius:3px">EE. UU.</span>
+    <span style="font-family:'Press Start 2P',monospace;font-size:9px;color:#000;background:#DC2626;padding:7px 10px;border-radius:3px">CANADÁ</span>
+  </div>
+  <h1 style="font-family:'Press Start 2P',monospace;font-size:clamp(22px,4vw,46px);line-height:1.35;margin:0;color:#FFD400;letter-spacing:.02em;text-shadow:4px 4px 0 #2A3FE5">
+    COPA MUNDIAL<br>FIFA 2026
+  </h1>
+  <p style="font-family:'Space Mono',monospace;color:#7a7a9a;font-size:14px;margin:20px 0 0;letter-spacing:.1em">
+    48 SELECCIONES &middot; 12 GRUPOS &middot; 104 PARTIDOS
+  </p>
+</div>
+
+<%# Podio campeón (solo si el torneo terminó) %>
+<% if @tournament[:finished] && @champion %>
+  <div style="border:3px dotted #FFD400;border-radius:10px;padding:26px;margin-bottom:30px;background:radial-gradient(120% 140% at 50% 0%, rgba(255,212,0,.08), transparent 60%);">
+    <div style="text-align:center;font-family:'Press Start 2P',monospace;font-size:12px;color:#FFD400;letter-spacing:.08em;margin-bottom:24px">&#9733; CAMPEÓN DEL MUNDO &#9733;</div>
+    <div style="display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:16px;align-items:end;max-width:760px;margin:0 auto;">
+      <div style="text-align:center;background:#0b0b16;border:2px dotted #C0C0C0;border-radius:8px;padding:20px 12px;">
+        <div style="width:46px;height:46px;border-radius:50%;background:#C0C0C0;color:#000;font-family:'Press Start 2P',monospace;font-size:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px">2</div>
+        <div style="font-family:'Press Start 2P',monospace;font-size:13px;color:#fff"><%= @runner_up&.dig(:code) %></div>
+        <div style="font-size:11px;color:#7a7a9a;margin-top:7px"><%= @runner_up&.dig(:name) %></div>
+        <div style="font-size:9px;color:#C0C0C0;margin-top:8px;letter-spacing:.08em">SUBCAMPEÓN</div>
+      </div>
+      <div style="text-align:center;background:#11110a;border:3px solid #FFD400;border-radius:8px;padding:26px 12px;box-shadow:0 0 0 4px rgba(255,212,0,.12)">
+        <div style="font-size:34px;line-height:1;margin-bottom:8px">&#127942;</div>
+        <div style="width:54px;height:54px;border-radius:50%;background:#FFD400;color:#000;font-family:'Press Start 2P',monospace;font-size:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">1</div>
+        <div style="font-family:'Press Start 2P',monospace;font-size:18px;color:#FFD400"><%= @champion[:code] %></div>
+        <div style="font-size:12px;color:#fff;margin-top:9px"><%= @champion[:name] %></div>
+        <div style="font-size:9px;color:#FFD400;margin-top:9px;letter-spacing:.1em">CAMPEÓN</div>
+      </div>
+      <div style="text-align:center;background:#0b0b16;border:2px dotted #CD7F32;border-radius:8px;padding:20px 12px;">
+        <div style="width:46px;height:46px;border-radius:50%;background:#CD7F32;color:#000;font-family:'Press Start 2P',monospace;font-size:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px">3</div>
+        <div style="font-family:'Press Start 2P',monospace;font-size:13px;color:#fff"><%= @third&.dig(:code) %></div>
+        <div style="font-size:11px;color:#7a7a9a;margin-top:7px"><%= @third&.dig(:name) %></div>
+        <div style="font-size:9px;color:#CD7F32;margin-top:8px;letter-spacing:.08em">TERCER LUGAR</div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%# Tarjetas de estado %>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:30px;">
+  <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px">
+    <div style="font-size:11px;color:#6f6f99;letter-spacing:.1em;margin-bottom:14px">ESTADO DEL TORNEO</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="status-dot"></span>
+      <span style="font-family:'Press Start 2P',monospace;font-size:11px;color:#FFD400;line-height:1.5"><%= @tournament[:phase] %></span>
+    </div>
+  </div>
+
+  <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px">
+    <div style="font-size:11px;color:#6f6f99;letter-spacing:.1em;margin-bottom:14px">PARTIDOS DE GRUPOS</div>
+    <div style="display:flex;align-items:baseline;gap:8px">
+      <span style="font-family:'Press Start 2P',monospace;font-size:20px;color:#16A34A"><%= @tournament[:played] %></span>
+      <span style="color:#6f6f99;font-size:13px">/ <%= @tournament[:total] %> JUGADOS</span>
+    </div>
+    <div style="margin-top:14px;height:10px;background:#000;border:1px solid #2A3FE5;border-radius:5px;overflow:hidden">
+      <% pct = @tournament[:total] > 0 ? (@tournament[:played].to_f / @tournament[:total] * 100).round : 0 %>
+      <div class="progress-bar" style="width:<%= pct %>%"></div>
+    </div>
+  </div>
+
+  <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px">
+    <div style="font-size:11px;color:#6f6f99;letter-spacing:.1em;margin-bottom:14px">PENDIENTES</div>
+    <div style="display:flex;align-items:baseline;gap:8px">
+      <span style="font-family:'Press Start 2P',monospace;font-size:20px;color:<%= @tournament[:pending] > 0 ? '#F59E0B' : '#16A34A' %>"><%= @tournament[:pending] %></span>
+      <span style="color:#6f6f99;font-size:13px">POR JUGAR</span>
+    </div>
+  </div>
+</div>
+
+<%# Accesos rápidos %>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+  <% [
+    { title: "GRUPOS",        desc: "12 grupos · tablas de posiciones",       href: groups_path,   dot: "#2A3FE5" },
+    { title: "PARTIDOS",      desc: "Registra y edita resultados de grupos",  href: matches_path,  dot: "#F4B9B0" },
+    { title: "ELIMINATORIAS", desc: "Bracket completo hasta la final",        href: knockout_path, dot: "#16A34A" }
+  ].each do |link| %>
+    <%= link_to link[:href],
+          class: "card-link",
+          style: "text-decoration:none;background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:12px;" do %>
+      <span style="width:30px;height:30px;border-radius:50%;background:<%= link[:dot] %>;display:inline-block"></span>
+      <span style="font-family:'Press Start 2P',monospace;font-size:12px;color:#fff;letter-spacing:.03em"><%= link[:title] %></span>
+      <span style="font-size:12px;color:#7a7a9a;line-height:1.5"><%= link[:desc] %></span>
+      <span style="font-family:'Press Start 2P',monospace;font-size:8px;color:#FFD400;letter-spacing:.06em;margin-top:4px">ABRIR &rarr;</span>
+    <% end %>
+  <% end %>
+</div>

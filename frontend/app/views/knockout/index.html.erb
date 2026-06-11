@@ -1,1 +1,88 @@
-<%# Eliminatorias — bracket visual r32 → final %>
+<%# Eliminatorias — bracket completo o estado bloqueado %>
+
+<h1 style="font-family:'Press Start 2P',monospace;font-size:24px;color:#FFD400;margin:0 0 22px;letter-spacing:.02em">
+  FASE ELIMINATORIA
+</h1>
+
+<% if @locked %>
+  <%# Estado bloqueado: aún faltan partidos de grupos %>
+  <div style="background:#0b0b16;border:3px dotted #DC2626;border-radius:10px;padding:48px 28px;text-align:center;max-width:620px;margin:30px auto">
+    <div style="font-size:30px;margin-bottom:18px">&#128274;</div>
+    <div style="font-family:'Press Start 2P',monospace;font-size:13px;color:#F4B9B0;line-height:1.7;margin-bottom:14px">FASE BLOQUEADA</div>
+    <p style="color:#9a9ab5;font-size:13px;line-height:1.7;margin:0 0 8px">
+      Primero deben completarse <strong style="color:#fff">todos</strong> los partidos de la fase de grupos.
+    </p>
+    <p style="color:#FFD400;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.05em;margin:18px 0 0">
+      FALTAN <%= @remaining %> PARTIDOS
+    </p>
+    <%= link_to "IR A PARTIDOS &rarr;".html_safe, matches_path,
+          style: "display:inline-block;margin-top:22px;text-decoration:none;font-family:'Press Start 2P',monospace;font-size:9px;color:#000;background:#FFD400;padding:12px 16px;border-radius:4px;letter-spacing:.05em" %>
+  </div>
+
+<% else %>
+  <%# Bracket activo %>
+  <div style="overflow-x:auto;padding:6px 2px 24px">
+    <div style="display:flex;gap:22px;align-items:stretch;min-width:max-content">
+
+      <% @rounds.each do |round| %>
+        <div style="display:flex;flex-direction:column;min-width:200px">
+          <div style="font-family:'Press Start 2P',monospace;font-size:9px;color:#FFD400;letter-spacing:.05em;text-align:center;padding:10px;border:2px dotted #2A3FE5;border-radius:5px;margin-bottom:14px">
+            <%= round[:name] %>
+          </div>
+          <div style="display:flex;flex-direction:column;justify-content:space-around;gap:10px;flex:1">
+            <% round[:matches].each do |bm| %>
+              <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:6px;overflow:hidden">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 11px;background:<%= bm[:home_bg] %>">
+                  <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:<%= bm[:home_color] %>"><%= bm[:home][:code] %></span>
+                  <span style="font-family:'Press Start 2P',monospace;font-size:11px;color:<%= bm[:home_color] %>"><%= bm[:home_goals] || "-" %></span>
+                </div>
+                <div style="height:1px;background:#2A3FE5;opacity:.4"></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 11px;background:<%= bm[:away_bg] %>">
+                  <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:<%= bm[:away_color] %>"><%= bm[:away][:code] %></span>
+                  <span style="font-family:'Press Start 2P',monospace;font-size:11px;color:<%= bm[:away_color] %>"><%= bm[:away_goals] || "-" %></span>
+                </div>
+                <% if bm[:pen_text].present? %>
+                  <div style="text-align:center;font-size:9px;color:#F4B9B0;padding:5px 0 7px"><%= bm[:pen_text] %></div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <%# Columna campeón %>
+      <% if @champion %>
+        <div style="display:flex;flex-direction:column;justify-content:center;min-width:200px">
+          <div style="background:#11110a;border:3px solid #FFD400;border-radius:8px;padding:22px 16px;text-align:center;box-shadow:0 0 0 4px rgba(255,212,0,.12)">
+            <div style="font-size:26px;margin-bottom:8px">&#127942;</div>
+            <div style="font-family:'Press Start 2P',monospace;font-size:8px;color:#FFD400;letter-spacing:.06em;margin-bottom:12px">CAMPEÓN</div>
+            <div style="font-family:'Press Start 2P',monospace;font-size:16px;color:#fff"><%= @champion[:code] %></div>
+            <div style="font-size:11px;color:#7a7a9a;margin-top:8px"><%= @champion[:name] %></div>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+
+  <%# Partido por tercer lugar %>
+  <% if @third %>
+    <div style="margin-top:14px;max-width:340px">
+      <div style="font-family:'Press Start 2P',monospace;font-size:9px;color:#CD7F32;letter-spacing:.05em;margin-bottom:12px">PARTIDO POR EL TERCER LUGAR</div>
+      <div style="background:#0b0b16;border:2px dotted #CD7F32;border-radius:6px;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 13px;">
+          <span style="font-family:'Press Start 2P',monospace;font-size:11px;color:#fff"><%= @third[:home][:code] %></span>
+          <span style="font-family:'Press Start 2P',monospace;font-size:12px;color:#fff"><%= @third[:home_goals] || "-" %></span>
+        </div>
+        <div style="height:1px;background:#CD7F32;opacity:.4"></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 13px;">
+          <span style="font-family:'Press Start 2P',monospace;font-size:11px;color:#fff"><%= @third[:away][:code] %></span>
+          <span style="font-family:'Press Start 2P',monospace;font-size:12px;color:#fff"><%= @third[:away_goals] || "-" %></span>
+        </div>
+        <% if @third[:pen_text].present? %>
+          <div style="text-align:center;font-size:9px;color:#F4B9B0;padding:5px 0 7px"><%= @third[:pen_text] %></div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

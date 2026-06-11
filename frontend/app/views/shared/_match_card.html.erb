@@ -1,0 +1,76 @@
+<%# Partial: tarjeta de partido.
+    Parámetro: match (hash con home, away, played, goals, etc.) %>
+<% played    = match[:played] %>
+<% home_code = match[:home][:code] %>
+<% away_code = match[:away][:code] %>
+<% home_name = match[:home][:name] %>
+<% away_name = match[:away][:name] %>
+
+<% if played %>
+  <% gh = match[:home_goals]; ga = match[:away_goals] %>
+  <% winner = gh > ga ? :home : ga > gh ? :away : :draw %>
+  <% home_color = winner == :home ? "#FFD400" : winner == :away ? "#5a5a78" : "#fff" %>
+  <% away_color = winner == :away ? "#FFD400" : winner == :home ? "#5a5a78" : "#fff" %>
+  <% result_note = winner == :draw ? "EMPATE" : (winner == :home ? home_name : away_name).upcase + " GANA" %>
+  <% note_color  = winner == :draw ? "#F4B9B0" : "#FFD400" %>
+<% else %>
+  <% home_color = "#fff"; away_color = "#fff" %>
+  <% result_note = nil %>
+<% end %>
+
+<div style="font-family:'Space Mono',monospace;background:#0b0b16;border:2px dotted #2A3FE5;border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+
+  <%# Header: grupo + badge de estado %>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+    <span style="font-family:'Press Start 2P',monospace;font-size:8px;color:#6f6f99;letter-spacing:.06em"><%= match[:round_label] %></span>
+    <% if played %>
+      <span style="font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:.06em;padding:4px 7px;border-radius:3px;background:rgba(22,163,74,.16);color:#16A34A;border:1px dotted #16A34A">JUGADO</span>
+    <% else %>
+      <span style="font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:.06em;padding:4px 7px;border-radius:3px;background:rgba(111,111,153,.12);color:#9a9ab5;border:1px dotted #3a3a52">PENDIENTE</span>
+    <% end %>
+  </div>
+
+  <%# Marcador central %>
+  <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;">
+    <span style="text-align:right;font-family:'Press Start 2P',monospace;font-size:13px;color:<%= home_color %>;letter-spacing:.02em"><%= home_code %></span>
+    <div style="min-width:64px;display:flex;flex-direction:column;align-items:center;gap:3px;">
+      <% if played %>
+        <span style="font-family:'Press Start 2P',monospace;font-size:18px;color:#fff;letter-spacing:.04em;white-space:nowrap"><%= match[:home_goals] %> - <%= match[:away_goals] %></span>
+        <% if match[:pen_text].present? %>
+          <span style="font-size:9px;color:#F4B9B0;letter-spacing:.03em"><%= match[:pen_text] %></span>
+        <% end %>
+      <% else %>
+        <span style="font-family:'Press Start 2P',monospace;font-size:16px;color:#3a3a52;letter-spacing:.04em">- : -</span>
+      <% end %>
+    </div>
+    <span style="text-align:left;font-family:'Press Start 2P',monospace;font-size:13px;color:<%= away_color %>;letter-spacing:.02em"><%= away_code %></span>
+  </div>
+
+  <%# Nombres completos %>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:10px;color:#7a7a9a;">
+    <span style="text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><%= home_name %></span>
+    <span style="text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><%= away_name %></span>
+  </div>
+
+  <%# Resultado %>
+  <% if result_note %>
+    <div style="text-align:center;font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:.06em;color:<%= note_color %>"><%= result_note %></div>
+  <% end %>
+
+  <%# Acciones %>
+  <% unless played %>
+    <%= form_with url: match_result_path(match[:id]), method: :patch, local: true, style: "display:flex;flex-direction:column;gap:8px;" do |f| %>
+      <div style="display:flex;align-items:center;gap:6px;justify-content:center;">
+        <%= f.number_field :home_goals, min: 0, placeholder: "0",
+              style: "width:38px;height:38px;text-align:center;font-family:'Press Start 2P',monospace;font-size:13px;background:#000;color:#FFD400;border:2px solid #FFD400;border-radius:5px;outline:none" %>
+        <span style="color:#6f6f99;font-weight:700">:</span>
+        <%= f.number_field :away_goals, min: 0, placeholder: "0",
+              style: "width:38px;height:38px;text-align:center;font-family:'Press Start 2P',monospace;font-size:13px;background:#000;color:#FFD400;border:2px solid #FFD400;border-radius:5px;outline:none" %>
+      </div>
+      <%= f.submit "REGISTRAR RESULTADO",
+            class: "btn-register",
+            style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.04em;padding:10px;border-radius:4px;background:transparent;color:#FFD400;border:2px dotted #FFD400;width:100%" %>
+    <% end %>
+  <% end %>
+
+</div>

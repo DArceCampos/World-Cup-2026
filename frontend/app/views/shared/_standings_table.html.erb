@@ -1,0 +1,38 @@
+<%# Partial: tabla de posiciones de un grupo.
+    Parámetros: rows (array), big (boolean para mostrar nombre completo) %>
+<div style="font-family:'Space Mono',monospace;font-size:<%= big ? '13px' : '11px' %>;color:#fff;width:100%;">
+
+  <div style="display:grid;grid-template-columns:2.1em minmax(0,1fr) 1.9em 1.7em 1.7em 1.7em 2.1em 2.1em 2.4em 2.6em;align-items:center;padding:0 .5em .55em;color:#6f6f99;font-size:.78em;letter-spacing:.04em;border-bottom:2px dotted #2A3FE5;">
+    <span>POS</span>
+    <span>EQUIPO</span>
+    <span style="text-align:center">PJ</span>
+    <span style="text-align:center">G</span>
+    <span style="text-align:center">E</span>
+    <span style="text-align:center">P</span>
+    <span style="text-align:center">GF</span>
+    <span style="text-align:center">GC</span>
+    <span style="text-align:center">DG</span>
+    <span style="text-align:center">PTS</span>
+  </div>
+
+  <% rows.each do |row| %>
+    <div style="display:grid;grid-template-columns:2.1em minmax(0,1fr) 1.9em 1.7em 1.7em 1.7em 2.1em 2.1em 2.4em 2.6em;align-items:center;padding:.55em .5em;border-left:3px solid <%= row[:accent] %>;background:<%= row[:bg] %>;border-bottom:1px dotted rgba(255,255,255,.07);">
+      <span style="color:<%= row[:pos_color] %>;font-weight:700"><%= row[:pos] %></span>
+      <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+        <span style="color:<%= row[:code_color] %>;font-weight:700;letter-spacing:.02em"><%= row[:code] %></span>
+        <% if big %>
+          <span style="display:block;color:#7a7a9a;font-size:.75em;font-weight:400;margin-top:.15em"><%= row[:name] %></span>
+        <% end %>
+      </span>
+      <span style="text-align:center;color:#c8c8e0"><%= row[:pj] %></span>
+      <span style="text-align:center;color:#c8c8e0"><%= row[:g] %></span>
+      <span style="text-align:center;color:#c8c8e0"><%= row[:e] %></span>
+      <span style="text-align:center;color:#c8c8e0"><%= row[:p] %></span>
+      <span style="text-align:center;color:#9a9ab5"><%= row[:gf] %></span>
+      <span style="text-align:center;color:#9a9ab5"><%= row[:gc] %></span>
+      <span style="text-align:center;color:<%= row[:dg_color] %>"><%= row[:dg_str] %></span>
+      <span style="text-align:center;color:#FFD400;font-weight:700"><%= row[:pts] %></span>
+    </div>
+  <% end %>
+
+</div>

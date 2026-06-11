@@ -1,0 +1,59 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #000000; }
+
+::-webkit-scrollbar { height: 10px; width: 10px; }
+::-webkit-scrollbar-track { background: #0b0b16; }
+::-webkit-scrollbar-thumb { background: #2A3FE5; border-radius: 0; }
+
+input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+@keyframes chomp {
+  0%,100% { clip-path: polygon(100% 74%, 44% 48%, 100% 21%, 100% 0, 0 0, 0 100%, 100% 100%); }
+  50%      { clip-path: polygon(100% 50%, 44% 48%, 100% 50%, 100% 0, 0 0, 0 100%, 100% 100%); }
+}
+
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.35; }
+}
+
+@keyframes dash {
+  to { background-position: 24px 0; }
+}
+
+.pac-dot {
+  width: 26px; height: 26px;
+  background: #FFD400;
+  border-radius: 50%;
+  display: inline-block;
+  animation: chomp 0.45s linear infinite;
+}
+
+.status-dot {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: #16A34A;
+  animation: blink 1.4s ease-in-out infinite;
+  display: inline-block;
+}
+
+.progress-bar {
+  height: 100%;
+  background: repeating-linear-gradient(90deg, #FFD400 0 8px, #000 8px 12px);
+  background-size: 24px 100%;
+  animation: dash 0.6s linear infinite;
+}
+
+.nav-link { text-decoration: none; font-family: 'Press Start 2P', monospace; font-size: 9px; letter-spacing: .04em; padding: 11px 13px; border-radius: 4px; border: 2px dotted; }
+.nav-link:hover { border-color: #FFD400 !important; color: #FFD400 !important; }
+
+.card-link { text-decoration: none; display: flex; flex-direction: column; gap: 12px; transition: transform .12s; }
+.card-link:hover { border-color: #FFD400 !important; transform: translateY(-3px); }
+
+.group-detail-link { text-decoration: none; }
+.group-detail-link:hover { color: #FFD400 !important; border-color: #FFD400 !important; }
+
+.btn-register:hover { background: #FFD400 !important; color: #000 !important; }
+.btn-edit:hover { color: #fff !important; border-color: #6f6f99 !important; }
+.btn-clear:hover { color: #DC2626 !important; border-color: #DC2626 !important; }
+.back-link:hover { color: #FFD400 !important; }

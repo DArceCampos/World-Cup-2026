@@ -1,1 +1,27 @@
-<%# Grupo — tabla de posiciones + partidos + formulario de resultado %>
+<%# Detalle de grupo — tabla de posiciones + partidos %>
+
+<%= link_to "&larr; Todos los grupos".html_safe, groups_path,
+      class: "back-link",
+      style: "font-family:'Space Mono',monospace;font-size:12px;color:#9a9ab5;letter-spacing:.05em;text-decoration:none" %>
+
+<h1 style="font-family:'Press Start 2P',monospace;font-size:30px;color:#FFD400;margin:14px 0 26px;letter-spacing:.03em">
+  GRUPO <%= @group[:name] %>
+</h1>
+
+<div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px;margin-bottom:30px">
+  <div style="font-size:11px;color:#6f6f99;letter-spacing:.12em;margin-bottom:16px">TABLA DE POSICIONES</div>
+  <%= render "shared/standings_table", rows: @group[:standings], big: true %>
+</div>
+
+<% played_count  = @group[:matches].count { |m| m[:played] } %>
+<% pending_count = @group[:matches].count { |m| !m[:played] } %>
+
+<div style="font-family:'Press Start 2P',monospace;font-size:13px;color:#fff;letter-spacing:.04em;margin-bottom:18px">
+  PARTIDOS &middot; <span style="color:#6f6f99"><%= played_count %> jugados &middot; <%= pending_count %> pendientes</span>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+  <% @group[:matches].each do |match| %>
+    <%= render "shared/match_card", match: match %>
+  <% end %>
+</div>

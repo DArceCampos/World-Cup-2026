@@ -77,9 +77,13 @@ World-Cup-2026/
 ```bash
 cd backend
 rails server -p 3000
+
+cd frontend
+rails server -p 4000
 ```
 
 La API queda disponible en `http://localhost:3000/api/v1`.
+El frontend queda disponible en `http://localhost:4000`.
 
 ---
 

@@ -1,1 +1,27 @@
-<%# Grupos — lista de los 12 grupos con tablas de posiciones %>
+<%# Fase de grupos — grid de los 12 grupos %>
+
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:8px">
+  <h1 style="font-family:'Press Start 2P',monospace;font-size:24px;color:#FFD400;margin:0;letter-spacing:.02em">FASE DE GRUPOS</h1>
+</div>
+
+<div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:26px;font-size:11px;color:#9a9ab5">
+  <span style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border-radius:2px;background:#16A34A;display:inline-block"></span>Clasifica directo (1° y 2°)</span>
+  <span style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border-radius:2px;background:#F59E0B;display:inline-block"></span>Posible mejor 3°</span>
+  <span style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border-radius:2px;background:#3a3a52;display:inline-block"></span>Eliminado (4°)</span>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px;">
+  <% @groups.each do |grp| %>
+    <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+        <span style="font-family:'Press Start 2P',monospace;font-size:14px;color:#FFD400;letter-spacing:.04em">GRUPO <%= grp[:name] %></span>
+        <%= link_to group_path(grp[:id]),
+              class: "group-detail-link",
+              style: "font-family:'Press Start 2P',monospace;font-size:7px;color:#9a9ab5;letter-spacing:.04em;padding:7px 9px;border:1px dotted #3a3a52;border-radius:3px" do %>
+          VER PARTIDOS &rarr;
+        <% end %>
+      </div>
+      <%= render "shared/standings_table", rows: grp[:standings], big: false %>
+    </div>
+  <% end %>
+</div>

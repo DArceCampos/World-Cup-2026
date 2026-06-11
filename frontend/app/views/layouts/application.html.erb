@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copa Mundial FIFA 2026</title>
-    <%= stylesheet_link_tag "tailwind", "application", data: { turbo_track: "reload" } %>
-  </head>
-  <body class="bg-gray-950 text-white min-h-screen">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copa Mundial FIFA 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <%= stylesheet_link_tag "application", data: { turbo_track: "reload" } %>
+</head>
+<body style="min-height:100vh;background:#000000;font-family:'Space Mono',monospace;color:#fff;padding-bottom:80px;">
 
-    <nav class="bg-gray-900 border-b border-gray-800">
-      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center gap-6">
-        <%= link_to "🏆 FIFA 2026", root_path, class: "text-yellow-400 font-bold text-lg" %>
-        <%= link_to "Grupos",       groups_path,   class: "text-gray-300 hover:text-white" %>
-        <%= link_to "Partidos",     matches_path,  class: "text-gray-300 hover:text-white" %>
-        <%= link_to "Eliminatorias", knockout_path, class: "text-gray-300 hover:text-white" %>
-      </div>
-    </nav>
+  <nav style="position:sticky;top:0;z-index:50;background:#000;border-bottom:3px dotted #2A3FE5;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <%= link_to root_path, style: "display:flex;align-items:center;gap:12px;text-decoration:none;" do %>
+      <span class="pac-dot"></span>
+      <span style="font-family:'Press Start 2P',monospace;font-size:13px;color:#FFD400;letter-spacing:.04em">WORLD CUP <span style="color:#fff">26</span></span>
+    <% end %>
 
-    <main class="max-w-7xl mx-auto px-4 py-8">
-      <%= yield %>
-    </main>
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+      <% [
+        ["INICIO",        root_path],
+        ["GRUPOS",        groups_path],
+        ["PARTIDOS",      matches_path],
+        ["ELIMINATORIAS", knockout_path]
+      ].each do |label, path| %>
+        <% active = current_page?(path) %>
+        <%= link_to label, path,
+          class: "nav-link",
+          style: "color:#{active ? '#000' : '#9a9ab5'};background:#{active ? '#FFD400' : 'transparent'};border-color:#{active ? '#FFD400' : '#2A3FE5'};" %>
+      <% end %>
+    </div>
+  </nav>
 
-  </body>
+  <main style="max-width:1280px;margin:0 auto;padding:34px 22px;">
+    <%= yield %>
+  </main>
+
+</body>
 </html>

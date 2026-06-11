@@ -1,1 +1,47 @@
-<%# Partidos — lista filtrable por fase con formulario de resultados %>
+<%# Partidos — listado filtrable por grupo y estado %>
+
+<h1 style="font-family:'Press Start 2P',monospace;font-size:24px;color:#FFD400;margin:0 0 22px;letter-spacing:.02em">
+  PARTIDOS &mdash; GRUPOS
+</h1>
+
+<%# Filtros %>
+<div style="display:flex;flex-direction:column;gap:14px;margin-bottom:26px">
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <span style="font-size:10px;color:#6f6f99;letter-spacing:.1em;margin-right:4px">GRUPO</span>
+    <% active_g = @group_filter.nil? || @group_filter.empty? %>
+    <%= link_to "TODOS", matches_path(status: @status_filter),
+          style: "cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;font-size:11px;letter-spacing:.04em;padding:8px 11px;border-radius:4px;text-decoration:none;color:#{active_g ? '#000' : '#9a9ab5'};background:#{active_g ? '#FFD400' : 'transparent'};border:1px dotted #{active_g ? '#FFD400' : '#3a3a52'}" %>
+    <% @groups.each do |g| %>
+      <% active = @group_filter == g %>
+      <%= link_to g, matches_path(group: g, status: @status_filter),
+            style: "cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;font-size:11px;letter-spacing:.04em;padding:8px 11px;border-radius:4px;text-decoration:none;color:#{active ? '#000' : '#9a9ab5'};background:#{active ? '#FFD400' : 'transparent'};border:1px dotted #{active ? '#FFD400' : '#3a3a52'}" %>
+    <% end %>
+  </div>
+
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+    <span style="font-size:10px;color:#6f6f99;letter-spacing:.1em;margin-right:4px">ESTADO</span>
+    <% [["TODOS", nil], ["PENDIENTES", "scheduled"], ["JUGADOS", "played"]].each do |label, val| %>
+      <% active = @status_filter == val %>
+      <%= link_to label, matches_path(group: @group_filter, status: val),
+            style: "cursor:pointer;font-family:'Space Mono',monospace;font-weight:700;font-size:11px;letter-spacing:.04em;padding:8px 11px;border-radius:4px;text-decoration:none;color:#{active ? '#000' : '#9a9ab5'};background:#{active ? '#FFD400' : 'transparent'};border:1px dotted #{active ? '#FFD400' : '#3a3a52'}" %>
+    <% end %>
+  </div>
+
+</div>
+
+<div style="font-size:11px;color:#6f6f99;margin-bottom:16px;letter-spacing:.05em">
+  <%= @matches.size %> PARTIDOS
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;">
+  <% @matches.each do |match| %>
+    <%= render "shared/match_card", match: match %>
+  <% end %>
+</div>
+
+<% if @matches.empty? %>
+  <div style="text-align:center;padding:60px 20px;color:#6f6f99;font-family:'Press Start 2P',monospace;font-size:11px;line-height:2">
+    NO HAY PARTIDOS<br><span style="color:#3a3a52;font-size:9px">con estos filtros</span>
+  </div>
+<% end %>

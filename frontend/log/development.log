@@ -1,0 +1,559 @@
+[e766bf31-ae0d-4574-b20d-109b28683082] Started GET "/" for ::1 at 2026-06-10 18:21:10 -0600
+[e766bf31-ae0d-4574-b20d-109b28683082] Processing by DashboardController#index as HTML
+[e766bf31-ae0d-4574-b20d-109b28683082]   Rendering layout layouts/application.html.erb
+[e766bf31-ae0d-4574-b20d-109b28683082]   Rendering dashboard/index.html.erb within layouts/application
+[e766bf31-ae0d-4574-b20d-109b28683082]   Rendered dashboard/index.html.erb within layouts/application (Duration: 3.7ms | Allocations: 838)
+[e766bf31-ae0d-4574-b20d-109b28683082]   Rendered layout layouts/application.html.erb (Duration: 248.9ms | Allocations: 13134)
+[e766bf31-ae0d-4574-b20d-109b28683082] Completed 200 OK in 539ms (Views: 337.0ms | Allocations: 18886)
+
+
+[8f2707f6-8ec3-42b6-a4b0-363569cb985d] Started GET "/favicon.ico" for ::1 at 2026-06-10 18:21:11 -0600
+[8f2707f6-8ec3-42b6-a4b0-363569cb985d]   
+[8f2707f6-8ec3-42b6-a4b0-363569cb985d] ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+[8f2707f6-8ec3-42b6-a4b0-363569cb985d]   
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18] Started GET "/groups" for ::1 at 2026-06-10 18:21:13 -0600
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18] Processing by GroupsController#index as HTML
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendering layout layouts/application.html.erb
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendering groups/index.html.erb within layouts/application
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 1.1ms | Allocations: 411)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.0ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered shared/_standings_table.html.erb (Duration: 0.0ms | Allocations: 131)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered groups/index.html.erb within layouts/application (Duration: 10.7ms | Allocations: 3239)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18]   Rendered layout layouts/application.html.erb (Duration: 19.4ms | Allocations: 4930)
+[32ac8fac-49e3-4db2-90eb-6a8b0b16da18] Completed 200 OK in 27ms (Views: 23.3ms | Allocations: 6124)
+
+
+[0039446d-baae-4d4a-9404-b90cf4ec5227] Started GET "/groups/8" for ::1 at 2026-06-10 18:21:17 -0600
+[0039446d-baae-4d4a-9404-b90cf4ec5227] Processing by GroupsController#show as HTML
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Parameters: {"id" => "8"}
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendering layout layouts/application.html.erb
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendering groups/show.html.erb within layouts/application
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 136)
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered shared/_match_card.html.erb (Duration: 22.2ms | Allocations: 1424)
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered groups/show.html.erb within layouts/application (Duration: 33.9ms | Allocations: 3539)
+[0039446d-baae-4d4a-9404-b90cf4ec5227]   Rendered layout layouts/application.html.erb (Duration: 42.4ms | Allocations: 5206)
+[0039446d-baae-4d4a-9404-b90cf4ec5227] Completed 200 OK in 48ms (Views: 43.2ms | Allocations: 5559)
+
+
+[be18b165-d2db-4e26-bf77-e123b71786f7] Started GET "/knockout" for ::1 at 2026-06-10 18:21:21 -0600
+[be18b165-d2db-4e26-bf77-e123b71786f7] Processing by KnockoutController#index as HTML
+[be18b165-d2db-4e26-bf77-e123b71786f7]   Rendering layout layouts/application.html.erb
+[be18b165-d2db-4e26-bf77-e123b71786f7]   Rendering knockout/index.html.erb within layouts/application
+[be18b165-d2db-4e26-bf77-e123b71786f7]   Rendered knockout/index.html.erb within layouts/application (Duration: 2.0ms | Allocations: 625)
+[be18b165-d2db-4e26-bf77-e123b71786f7]   Rendered layout layouts/application.html.erb (Duration: 11.7ms | Allocations: 2293)
+[be18b165-d2db-4e26-bf77-e123b71786f7] Completed 200 OK in 21ms (Views: 16.5ms | Allocations: 2646)
+
+
+[72fc86f8-9e1e-46e7-9535-dab6c6557375] Started GET "/matches" for ::1 at 2026-06-10 18:21:24 -0600
+[72fc86f8-9e1e-46e7-9535-dab6c6557375] Processing by MatchesController#index as HTML
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendering layout layouts/application.html.erb
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendering matches/index.html.erb within layouts/application
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 113.7ms | Allocations: 1934)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered matches/index.html.erb within layouts/application (Duration: 186.7ms | Allocations: 25039)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375]   Rendered layout layouts/application.html.erb (Duration: 195.2ms | Allocations: 26707)
+[72fc86f8-9e1e-46e7-9535-dab6c6557375] Completed 200 OK in 205ms (Views: 200.0ms | Allocations: 27408)
+
+
+[48811976-6f31-4c03-b40c-0da64cc9dedf] Started GET "/" for ::1 at 2026-06-10 18:21:28 -0600
+[48811976-6f31-4c03-b40c-0da64cc9dedf] Processing by DashboardController#index as HTML
+[48811976-6f31-4c03-b40c-0da64cc9dedf]   Rendering layout layouts/application.html.erb
+[48811976-6f31-4c03-b40c-0da64cc9dedf]   Rendering dashboard/index.html.erb within layouts/application
+[48811976-6f31-4c03-b40c-0da64cc9dedf]   Rendered dashboard/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 157)
+[48811976-6f31-4c03-b40c-0da64cc9dedf]   Rendered layout layouts/application.html.erb (Duration: 15.0ms | Allocations: 1823)
+[48811976-6f31-4c03-b40c-0da64cc9dedf] Completed 200 OK in 17ms (Views: 16.3ms | Allocations: 2025)
+
+
+[4c30d164-f1da-4d80-99ac-645f441e7a7e] Started GET "/matches" for ::1 at 2026-06-10 18:22:07 -0600
+[4c30d164-f1da-4d80-99ac-645f441e7a7e] Processing by MatchesController#index as HTML
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendering layout layouts/application.html.erb
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendering matches/index.html.erb within layouts/application
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 530)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 8.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 253)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.4ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered matches/index.html.erb within layouts/application (Duration: 99.9ms | Allocations: 23261)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e]   Rendered layout layouts/application.html.erb (Duration: 109.2ms | Allocations: 24945)
+[4c30d164-f1da-4d80-99ac-645f441e7a7e] Completed 200 OK in 110ms (Views: 110.0ms | Allocations: 25492)
+
+
+[53f69924-e530-42ac-8676-18f87280e138] Started GET "/" for ::1 at 2026-06-10 18:22:11 -0600
+[53f69924-e530-42ac-8676-18f87280e138] Processing by DashboardController#index as HTML
+[53f69924-e530-42ac-8676-18f87280e138]   Rendering layout layouts/application.html.erb
+[53f69924-e530-42ac-8676-18f87280e138]   Rendering dashboard/index.html.erb within layouts/application
+[53f69924-e530-42ac-8676-18f87280e138]   Rendered dashboard/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 157)
+[53f69924-e530-42ac-8676-18f87280e138]   Rendered layout layouts/application.html.erb (Duration: 10.9ms | Allocations: 1823)
+[53f69924-e530-42ac-8676-18f87280e138] Completed 200 OK in 13ms (Views: 12.4ms | Allocations: 2026)
+
+
+[da310562-1e64-406b-a78d-607567b8fabb] Started GET "/" for ::1 at 2026-06-10 18:34:45 -0600
+[da310562-1e64-406b-a78d-607567b8fabb] Processing by DashboardController#index as HTML
+[da310562-1e64-406b-a78d-607567b8fabb]   Rendering layout layouts/application.html.erb
+[da310562-1e64-406b-a78d-607567b8fabb]   Rendering dashboard/index.html.erb within layouts/application
+[da310562-1e64-406b-a78d-607567b8fabb]   Rendered dashboard/index.html.erb within layouts/application (Duration: 1.3ms | Allocations: 577)
+[da310562-1e64-406b-a78d-607567b8fabb]   Rendered layout layouts/application.html.erb (Duration: 12.4ms | Allocations: 2468)
+[da310562-1e64-406b-a78d-607567b8fabb] Completed 200 OK in 6116ms (Views: 19.4ms | Allocations: 18019)
+
+
+[97d6e1b7-45eb-46e9-ad36-cd9b63e31801] Started GET "/" for ::1 at 2026-06-10 18:37:49 -0600
+[97d6e1b7-45eb-46e9-ad36-cd9b63e31801] Processing by DashboardController#index as HTML
+[97d6e1b7-45eb-46e9-ad36-cd9b63e31801]   Rendering layout layouts/application.html.erb
+[97d6e1b7-45eb-46e9-ad36-cd9b63e31801]   Rendering dashboard/index.html.erb within layouts/application
+[97d6e1b7-45eb-46e9-ad36-cd9b63e31801]   Rendered dashboard/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 834)
+[97d6e1b7-45eb-46e9-ad36-cd9b63e31801]   Rendered layout layouts/application.html.erb (Duration: 106.3ms | Allocations: 5780)
+[97d6e1b7-45eb-46e9-ad36-cd9b63e31801] Completed 200 OK in 472ms (Views: 125.4ms | Allocations: 19139)
+
+
+[0146ded1-5456-4cd9-a412-1b769986af82] Started GET "/matches" for ::1 at 2026-06-10 18:37:51 -0600
+[0146ded1-5456-4cd9-a412-1b769986af82] Processing by MatchesController#index as HTML
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendering layout layouts/application.html.erb
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendering matches/index.html.erb within layouts/application
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 39.3ms | Allocations: 3643)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 253)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 2.2ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 26.6ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 253)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 2.0ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.6ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.4ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 2.1ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.6ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.7ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 1.4ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered matches/index.html.erb within layouts/application (Duration: 199.3ms | Allocations: 26784)
+[0146ded1-5456-4cd9-a412-1b769986af82]   Rendered layout layouts/application.html.erb (Duration: 213.6ms | Allocations: 28470)
+[0146ded1-5456-4cd9-a412-1b769986af82] Completed 200 OK in 819ms (Views: 218.3ms | Allocations: 30959)
+
+
+[107cd4cc-2cb3-464f-ad11-d822e2dc2e4d] Started PATCH "/matches/1/result" for ::1 at 2026-06-10 18:37:57 -0600
+[107cd4cc-2cb3-464f-ad11-d822e2dc2e4d] Processing by MatchesController#result as HTML
+[107cd4cc-2cb3-464f-ad11-d822e2dc2e4d]   Parameters: {"authenticity_token" => "DS5A2D8a2EGFp4Zc-zZV9pL9U8UyhVVpPNSmOy9EW9Y2CZM6KMg6qx8LdTEuo6tKBlZ1rraRlMvXWT3HElBXwQ", "home_goals" => "1", "away_goals" => "0", "commit" => "REGISTRAR RESULTADO", "id" => "1"}
+[107cd4cc-2cb3-464f-ad11-d822e2dc2e4d] [31mUnpermitted parameters: :_method, :authenticity_token, :commit, :id. Context: { controller: MatchesController, action: result, request: #<ActionDispatch::Request:0x00000220d11b9ba0>, params: {"_method" => "patch", "authenticity_token" => "DS5A2D8a2EGFp4Zc-zZV9pL9U8UyhVVpPNSmOy9EW9Y2CZM6KMg6qx8LdTEuo6tKBlZ1rraRlMvXWT3HElBXwQ", "home_goals" => "1", "away_goals" => "0", "commit" => "REGISTRAR RESULTADO", "controller" => "matches", "action" => "result", "id" => "1"} }[0m
+[107cd4cc-2cb3-464f-ad11-d822e2dc2e4d] Redirected to http://localhost:4000/matches
+[107cd4cc-2cb3-464f-ad11-d822e2dc2e4d] Completed 302 Found in 146ms (Allocations: 1222)
+
+
+[d40cb870-c129-4346-bb78-b2895729c28c] Started GET "/matches" for ::1 at 2026-06-10 18:37:57 -0600
+[d40cb870-c129-4346-bb78-b2895729c28c] Processing by MatchesController#index as HTML
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendering layout layouts/application.html.erb
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendering matches/index.html.erb within layouts/application
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 31)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.7ms | Allocations: 543)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.4ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.5ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.4ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 4.2ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 4.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 3.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 7.9ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.4ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 5.6ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.6ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.9ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 3.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 3.3ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 3.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 3.6ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 6.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 253)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.4ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 2.1ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.6ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered matches/index.html.erb within layouts/application (Duration: 190.8ms | Allocations: 22982)
+[d40cb870-c129-4346-bb78-b2895729c28c]   Rendered layout layouts/application.html.erb (Duration: 202.6ms | Allocations: 24663)
+[d40cb870-c129-4346-bb78-b2895729c28c] Completed 200 OK in 617ms (Views: 204.5ms | Allocations: 26966)
+
+
+[c59887c7-631a-40a3-a156-4d28c9524079] Started GET "/matches?status=played" for ::1 at 2026-06-10 18:38:01 -0600
+[c59887c7-631a-40a3-a156-4d28c9524079] Processing by MatchesController#index as HTML
+[c59887c7-631a-40a3-a156-4d28c9524079]   Parameters: {"status" => "played"}
+[c59887c7-631a-40a3-a156-4d28c9524079]   Rendering layout layouts/application.html.erb
+[c59887c7-631a-40a3-a156-4d28c9524079]   Rendering matches/index.html.erb within layouts/application
+[c59887c7-631a-40a3-a156-4d28c9524079]   Rendered shared/_match_card.html.erb (Duration: 0.0ms | Allocations: 31)
+[c59887c7-631a-40a3-a156-4d28c9524079]   Rendered matches/index.html.erb within layouts/application (Duration: 1.3ms | Allocations: 982)
+[c59887c7-631a-40a3-a156-4d28c9524079]   Rendered layout layouts/application.html.erb (Duration: 13.1ms | Allocations: 2647)
+[c59887c7-631a-40a3-a156-4d28c9524079] Completed 200 OK in 106ms (Views: 14.4ms | Allocations: 3324)
+
+
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9] Started GET "/matches" for ::1 at 2026-06-10 18:38:02 -0600
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9] Processing by MatchesController#index as HTML
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendering layout layouts/application.html.erb
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendering matches/index.html.erb within layouts/application
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.1ms | Allocations: 31)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 538)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.6ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 2.5ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 2.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 2.6ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 2.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 2.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 3.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 3.3ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.3ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.4ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.6ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.5ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 2.2ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 2.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.6ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.1ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 2.9ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.5ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.2ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.7ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 1.0ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered shared/_match_card.html.erb (Duration: 0.8ms | Allocations: 252)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered matches/index.html.erb within layouts/application (Duration: 152.8ms | Allocations: 22975)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9]   Rendered layout layouts/application.html.erb (Duration: 165.7ms | Allocations: 24640)
+[212b48f6-b489-44ff-abe2-3a4b4251ddd9] Completed 200 OK in 608ms (Views: 167.2ms | Allocations: 26941)
+
+
+[9ba8f449-66bb-457a-b1f8-98c8da94f91f] Started GET "/" for ::1 at 2026-06-10 18:38:05 -0600
+[9ba8f449-66bb-457a-b1f8-98c8da94f91f] Processing by DashboardController#index as HTML
+[9ba8f449-66bb-457a-b1f8-98c8da94f91f]   Rendering layout layouts/application.html.erb
+[9ba8f449-66bb-457a-b1f8-98c8da94f91f]   Rendering dashboard/index.html.erb within layouts/application
+[9ba8f449-66bb-457a-b1f8-98c8da94f91f]   Rendered dashboard/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 155)
+[9ba8f449-66bb-457a-b1f8-98c8da94f91f]   Rendered layout layouts/application.html.erb (Duration: 10.7ms | Allocations: 1819)
+[9ba8f449-66bb-457a-b1f8-98c8da94f91f] Completed 200 OK in 234ms (Views: 12.0ms | Allocations: 3158)
+
+
+[12d0a6d8-4782-4256-a6d8-868c2a40792e] Started GET "/groups" for ::1 at 2026-06-10 18:38:07 -0600
+[12d0a6d8-4782-4256-a6d8-868c2a40792e] Processing by GroupsController#index as HTML
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendering layout layouts/application.html.erb
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendering groups/index.html.erb within layouts/application
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 2.5ms | Allocations: 401)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.8ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.2ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.2ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered shared/_standings_table.html.erb (Duration: 0.1ms | Allocations: 131)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered groups/index.html.erb within layouts/application (Duration: 30.2ms | Allocations: 3205)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e]   Rendered layout layouts/application.html.erb (Duration: 44.8ms | Allocations: 4870)
+[12d0a6d8-4782-4256-a6d8-868c2a40792e] Completed 200 OK in 223ms (Views: 49.7ms | Allocations: 6929)
+
+
+[dc7db2d3-bb89-4a1b-8771-6f46a051ec5f] Started GET "/" for ::1 at 2026-06-10 18:38:10 -0600
+[dc7db2d3-bb89-4a1b-8771-6f46a051ec5f] Processing by DashboardController#index as HTML
+[dc7db2d3-bb89-4a1b-8771-6f46a051ec5f]   Rendering layout layouts/application.html.erb
+[dc7db2d3-bb89-4a1b-8771-6f46a051ec5f]   Rendering dashboard/index.html.erb within layouts/application
+[dc7db2d3-bb89-4a1b-8771-6f46a051ec5f]   Rendered dashboard/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 155)
+[dc7db2d3-bb89-4a1b-8771-6f46a051ec5f]   Rendered layout layouts/application.html.erb (Duration: 10.0ms | Allocations: 1835)
+[dc7db2d3-bb89-4a1b-8771-6f46a051ec5f] Completed 200 OK in 243ms (Views: 11.4ms | Allocations: 3184)
+
+
