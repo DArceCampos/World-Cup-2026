@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # Estado global del torneo y avance de fases.
-      get  "tournament",          to: "tournaments#show"
-      patch "tournament/advance", to: "tournaments#advance"
+      get  "tournament",                to: "tournaments#show"
+      patch "tournament/advance",       to: "tournaments#advance"
+      post  "tournament/reset_groups",  to: "tournaments#reset_groups"
 
       # CRUD de grupos y equipos.
       resources :groups, only: %i[index show create update destroy]

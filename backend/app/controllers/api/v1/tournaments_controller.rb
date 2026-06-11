@@ -9,6 +9,15 @@ module Api
         render_data(tournament_payload(tournament))
       end
 
+      # POST /api/v1/tournament/reset_groups
+      # Borra resultados de grupos y eliminatorias, reinicia stats de equipos
+      # y devuelve el torneo a group_stage para poder volver a simular.
+      def reset_groups
+        tournament = current_tournament
+        TournamentResetter.new(tournament).reset_groups!
+        render_data({ status: tournament.reload.status, message: "Fase de grupos reiniciada." })
+      end
+
       # PATCH /api/v1/tournament/advance
       # Avanza la fase del torneo:
       #   - group_stage -> knockout (construye dieciseisavos)

@@ -1,28 +1,18 @@
-# MatchResultRecorder — registra el resultado de un partido y, si es de
-# fase de grupos, actualiza las estadísticas acumuladas de ambos equipos.
-#
-# Responsabilidad única (SRP): traducir un resultado en cambios de estado
-# consistentes. Toda la operación corre en una transacción para garantizar
-# que el partido y las estadísticas queden siempre sincronizados.
-#
-# Uso:
-#   MatchResultRecorder.new(match, params).call
 class MatchResultRecorder
-  POINTS_WIN = 3
+  POINTS_WIN  = 3
   POINTS_DRAW = 1
 
-  # Error de dominio cuando el resultado es inválido.
   class InvalidResult < StandardError; end
 
   def initialize(match, params)
-    @match = match
+    @match  = match
     @params = params
   end
 
   def call
-    raise InvalidResult, "El partido ya tiene un resultado registrado" if @match.played?
-
     ActiveRecord::Base.transaction do
+      revert_team_stats if @match.played? && @match.group_phase?
+
       assign_score
       @match.status = "played"
       @match.save!
@@ -36,12 +26,12 @@ class MatchResultRecorder
   private
 
   def assign_score
-    @match.home_goals = @params[:home_goals].to_i
-    @match.away_goals = @params[:away_goals].to_i
+    @match.home_goals       = @params[:home_goals].to_i
+    @match.away_goals       = @params[:away_goals].to_i
     @match.home_extra_goals = @params[:home_extra_goals].to_i
     @match.away_extra_goals = @params[:away_extra_goals].to_i
-    @match.home_penalties = @params[:home_penalties].to_i
-    @match.away_penalties = @params[:away_penalties].to_i
+    @match.home_penalties   = @params[:home_penalties].to_i
+    @match.away_penalties   = @params[:away_penalties].to_i
 
     validate_score!
   end
@@ -51,7 +41,6 @@ class MatchResultRecorder
       raise InvalidResult, "Los goles no pueden ser negativos"
     end
 
-    # En fase de grupos no hay prórroga ni penales.
     if @match.group_phase? && (penalties_present? || extra_present?)
       raise InvalidResult, "La fase de grupos no admite prórroga ni penales"
     end
@@ -65,7 +54,27 @@ class MatchResultRecorder
     @match.home_extra_goals.positive? || @match.away_extra_goals.positive?
   end
 
-  # Actualiza puntos, goles y récord (V/E/D) de ambos equipos.
+  # Deshace la contribución del resultado anterior sobre las estadísticas
+  # de ambos equipos antes de aplicar el nuevo marcador.
+  def revert_team_stats
+    home = @match.home_team
+    away = @match.away_team
+
+    revert_goals(home, scored: @match.home_goals, conceded: @match.away_goals)
+    revert_goals(away, scored: @match.away_goals, conceded: @match.home_goals)
+
+    if @match.home_goals > @match.away_goals
+      revert_win(home); revert_loss(away)
+    elsif @match.away_goals > @match.home_goals
+      revert_win(away); revert_loss(home)
+    else
+      revert_draw(home); revert_draw(away)
+    end
+
+    home.save!
+    away.save!
+  end
+
   def update_team_stats
     home = @match.home_team
     away = @match.away_team
@@ -74,14 +83,11 @@ class MatchResultRecorder
     apply_goals(away, scored: @match.away_goals, conceded: @match.home_goals)
 
     if @match.home_goals > @match.away_goals
-      register_win(home)
-      register_loss(away)
+      register_win(home); register_loss(away)
     elsif @match.away_goals > @match.home_goals
-      register_win(away)
-      register_loss(home)
+      register_win(away); register_loss(home)
     else
-      register_draw(home)
-      register_draw(away)
+      register_draw(home); register_draw(away)
     end
 
     home.save!
@@ -89,23 +95,44 @@ class MatchResultRecorder
   end
 
   def apply_goals(team, scored:, conceded:)
-    team.matches_played += 1
-    team.goals_for += scored
-    team.goals_against += conceded
-    team.goal_difference = team.goals_for - team.goals_against
+    team.matches_played   += 1
+    team.goals_for        += scored
+    team.goals_against    += conceded
+    team.goal_difference   = team.goals_for - team.goals_against
+  end
+
+  def revert_goals(team, scored:, conceded:)
+    team.matches_played   -= 1
+    team.goals_for        -= scored
+    team.goals_against    -= conceded
+    team.goal_difference   = team.goals_for - team.goals_against
   end
 
   def register_win(team)
-    team.wins += 1
+    team.wins   += 1
     team.points += POINTS_WIN
   end
 
   def register_draw(team)
-    team.draws += 1
+    team.draws  += 1
     team.points += POINTS_DRAW
   end
 
   def register_loss(team)
     team.losses += 1
+  end
+
+  def revert_win(team)
+    team.wins   -= 1
+    team.points -= POINTS_WIN
+  end
+
+  def revert_draw(team)
+    team.draws  -= 1
+    team.points -= POINTS_DRAW
+  end
+
+  def revert_loss(team)
+    team.losses -= 1
   end
 end

@@ -25,3 +25,97 @@
     </div>
   <% end %>
 </div>
+
+<%# ─── Mejores Terceros ─────────────────────────────────────────────── %>
+<div style="margin-top:48px">
+  <div style="display:flex;align-items:center;gap:14px;margin-bottom:10px;flex-wrap:wrap">
+    <h2 style="font-family:'Press Start 2P',monospace;font-size:16px;color:#F59E0B;margin:0;letter-spacing:.02em">MEJORES TERCEROS</h2>
+    <span style="font-family:'Press Start 2P',monospace;font-size:8px;color:#6f6f99;padding:5px 9px;border:1px dotted #3a3a52;border-radius:3px">12 GRUPOS</span>
+  </div>
+  <p style="font-family:'Space Mono',monospace;color:#9a9ab5;font-size:12px;margin:0 0 20px;line-height:1.7">
+    Los <span style="color:#F59E0B;font-weight:bold">8 mejores</span> terceros lugares de los 12 grupos avanzan a los dieciseisavos de final.
+    Ordenados por puntos &rarr; diferencia de goles &rarr; goles a favor.
+  </p>
+  <div id="thirds-root">
+    <% if @best_thirds.empty? %>
+      <div style="background:#0b0b16;border:2px dotted #3a3a52;border-radius:8px;padding:40px;text-align:center">
+        <div style="font-size:26px;margin-bottom:14px">&#127942;</div>
+        <div style="font-family:'Press Start 2P',monospace;font-size:9px;color:#46465e;letter-spacing:.05em">SIN DATOS AÚN</div>
+        <p style="font-family:'Space Mono',monospace;font-size:12px;margin:12px 0 0;color:#3a3a52">Registra resultados de grupos para ver el ranking de terceros.</p>
+      </div>
+    <% else %>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px;font-size:11px;color:#9a9ab5">
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border-radius:2px;background:#F59E0B;display:inline-block"></span>Clasifican (top 8)</span>
+        <span style="display:flex;align-items:center;gap:7px"><span style="width:11px;height:11px;border-radius:2px;background:#3a3a52;display:inline-block"></span>Eliminados</span>
+      </div>
+      <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;overflow:hidden">
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:12px">
+            <thead>
+              <tr style="color:#6f6f99;font-size:9px;letter-spacing:.05em;border-bottom:2px dotted #2A3FE5">
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">#</th>
+                <th style="padding:11px 14px;text-align:left;font-weight:normal">EQUIPO</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">GR</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">PJ</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">G</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">E</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">P</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">GF</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">GC</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">DG</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">PTS</th>
+                <th style="padding:11px 14px;text-align:center;font-weight:normal">ESTADO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @best_thirds.each_with_index do |t, i| %>
+                <% rank = i + 1; ok = rank <= 8 %>
+                <% accent = ok ? '#F59E0B' : '#3a3a52' %>
+                <% bg     = ok ? 'rgba(245,158,11,.07)' : 'transparent' %>
+                <% txt    = ok ? '#fff' : '#6f6f99' %>
+                <% dg_color = t[:dg] > 0 ? '#16A34A' : t[:dg] < 0 ? '#DC2626' : '#9a9ab5' %>
+
+                <% if rank == 9 %>
+                  <tr>
+                    <td colspan="12" style="padding:0;border:none">
+                      <div style="height:2px;background:linear-gradient(90deg,transparent,#F59E0B 20%,#F59E0B 80%,transparent)"></div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="12" style="padding:4px 14px;font-family:'Press Start 2P',monospace;font-size:7px;color:#6f6f99;letter-spacing:.06em;background:#070710">
+                      &#8593; CLASIFICAN &nbsp;&middot;&nbsp; &#8595; ELIMINADOS
+                    </td>
+                  </tr>
+                <% end %>
+
+                <tr style="border-left:3px solid <%= accent %>;background:<%= bg %>;border-bottom:1px dotted rgba(42,63,229,.2)">
+                  <td style="padding:10px 14px;text-align:center;font-family:'Press Start 2P',monospace;font-size:10px;color:<%= ok ? '#F59E0B' : '#46465e' %>"><%= rank %></td>
+                  <td style="padding:10px 14px">
+                    <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:<%= txt %>"><%= t[:code] %></div>
+                    <div style="font-size:10px;color:#6f6f99;margin-top:3px"><%= t[:name] %></div>
+                  </td>
+                  <td style="padding:10px 14px;text-align:center;font-family:'Press Start 2P',monospace;font-size:9px;color:#6f6f99"><%= t[:group] %></td>
+                  <td style="padding:10px 14px;text-align:center;color:<%= txt %>"><%= t[:pj] %></td>
+                  <td style="padding:10px 14px;text-align:center;color:<%= txt %>"><%= t[:g] %></td>
+                  <td style="padding:10px 14px;text-align:center;color:<%= txt %>"><%= t[:e] %></td>
+                  <td style="padding:10px 14px;text-align:center;color:<%= txt %>"><%= t[:p] %></td>
+                  <td style="padding:10px 14px;text-align:center;color:<%= txt %>"><%= t[:gf] %></td>
+                  <td style="padding:10px 14px;text-align:center;color:<%= txt %>"><%= t[:gc] %></td>
+                  <td style="padding:10px 14px;text-align:center;font-weight:bold;color:<%= dg_color %>"><%= t[:dg_str] %></td>
+                  <td style="padding:10px 14px;text-align:center;font-family:'Press Start 2P',monospace;font-size:11px;font-weight:bold;color:<%= ok ? '#FFD400' : '#46465e' %>"><%= t[:pts] %></td>
+                  <td style="padding:10px 14px;text-align:center">
+                    <% if ok %>
+                      <span style="background:#F59E0B;color:#000;font-family:'Press Start 2P',monospace;font-size:7px;padding:3px 7px;border-radius:3px;letter-spacing:.05em">CLASIFICA</span>
+                    <% else %>
+                      <span style="color:#46465e;font-family:'Press Start 2P',monospace;font-size:7px;padding:3px 7px;border:1px dotted #3a3a52;border-radius:3px;letter-spacing:.05em">ELIMINADO</span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

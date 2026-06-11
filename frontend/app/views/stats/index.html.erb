@@ -1,0 +1,172 @@
+<%# Estadísticas del torneo — calculadas client-side desde localStorage %>
+
+<h1 style="font-family:'Press Start 2P',monospace;font-size:clamp(18px,5vw,24px);color:#FFD400;margin:0 0 22px;letter-spacing:.02em">
+  ESTADÍSTICAS
+</h1>
+
+<div id="stats-root" style="animation:rise .3s ease">
+  <div style="text-align:center;padding:40px;color:#6f6f99;font-size:13px">Cargando...</div>
+</div>
+
+<script>
+window.STATS_DATA = <%= raw @stats_data %>;
+(function() {
+  const D = window.STATS_DATA;
+
+  function computeStats() {
+    if (!D || !D.teams) return null;
+    const all = D.teams.map(function(t) { return Object.assign({}, t); });
+    const ranked = all.slice().sort(function(a,b) { return b.pts-a.pts || b.dg-a.dg || b.gf-a.gf || a.gc-b.gc; });
+    ranked.forEach(function(s,i) { s.rank = i + 1; });
+    const withGames = all.filter(function(s) { return s.pj > 0; });
+    const topAtt = all.slice().sort(function(a,b) { return b.gf-a.gf || b.dg-a.dg; }).slice(0, 5);
+    const topDef = withGames.slice().sort(function(a,b) { return a.gc-b.gc || b.dg-a.dg; }).slice(0, 5);
+    var totalGoals = 0, mp = 0, draws = 0, biggest = null;
+    (D.matches || []).forEach(function(m) {
+      mp++; totalGoals += m.hg + m.ag;
+      var diff = Math.abs(m.hg - m.ag);
+      if (!biggest || diff > biggest.diff) {
+        biggest = { diff: diff, f: { h: { code: m.home_code }, a: { code: m.away_code }, group: m.group }, r: [m.hg, m.ag] };
+      }
+      if (m.hg === m.ag) draws++;
+    });
+    return { ranked: ranked, topAtt: topAtt, topDef: topDef, totalGoals: totalGoals,
+      mp: mp, draws: draws, avg: mp ? (totalGoals / mp).toFixed(2) : '0.00', biggest: biggest };
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function barRow(rank, code, name, value, label, color, barPct) {
+    return `<div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px">
+        <span style="font-family:'Space Mono',monospace;font-size:12px;color:#fff">
+          <span style="color:#6f6f99">${rank}.</span>
+          <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:${color}"> ${esc(code)}</span>
+          <span style="color:#7a7a9a;font-size:11px"> ${esc(name)}</span>
+        </span>
+        <span style="font-family:'Press Start 2P',monospace;font-size:12px;color:${color}">${value}${label}</span>
+      </div>
+      <div style="height:7px;background:#000;border-radius:4px;overflow:hidden">
+        <div style="height:100%;width:${barPct};background:${color}"></div>
+      </div>
+    </div>`;
+  }
+
+  function renderStats() {
+    const st = computeStats();
+    const root = document.getElementById('stats-root');
+
+    if (!st || st.mp === 0) {
+      root.innerHTML = `
+        <div style="background:#0b0b16;border:3px dotted #3a3a52;border-radius:10px;padding:48px 28px;text-align:center;max-width:560px;margin:30px auto">
+          <div style="font-size:28px;margin-bottom:16px">&#128202;</div>
+          <div style="font-family:'Press Start 2P',monospace;font-size:11px;color:#9a9ab5;line-height:1.7;margin-bottom:12px">SIN DATOS A&Uacute;N</div>
+          <p style="color:#7a7a9a;font-size:13px;line-height:1.7;margin:0">Registra resultados de partidos para ver las estad&iacute;sticas del torneo.</p>
+          <a href="/matches" style="display:inline-block;margin-top:20px;text-decoration:none;font-family:'Press Start 2P',monospace;font-size:9px;color:#000;background:#FFD400;padding:12px 16px;border-radius:4px;letter-spacing:.05em">IR A PARTIDOS &rarr;</a>
+        </div>`;
+      return;
+    }
+
+    const medal = ['#FFD400','#C0C0C0','#CD7F32'];
+
+    const biggestText = st.biggest
+      ? `${esc(st.biggest.f.h.code)} ${st.biggest.r[0]}-${st.biggest.r[1]} ${esc(st.biggest.f.a.code)}`
+      : '&mdash;';
+    const biggestSub = st.biggest
+      ? `Grupo ${st.biggest.f.group} &middot; diferencia de ${st.biggest.diff}`
+      : 'Sin partidos jugados';
+
+    const topAttHTML = st.topAtt.map((s, i) => {
+      const color = i === 0 ? '#FFD400' : '#16A34A';
+      const barPct = st.topAtt[0].gf ? Math.round(s.gf / st.topAtt[0].gf * 100) + '%' : '0%';
+      return barRow(i+1, s.code, s.name, s.gf, '', color, barPct);
+    }).join('');
+
+    const topDefHTML = st.topDef.map((s, i) => {
+      const color = i === 0 ? '#FFD400' : '#2A3FE5';
+      const mx = st.topDef[st.topDef.length - 1].gc;
+      const barPct = mx ? Math.round((1 - s.gc / (mx + 1)) * 100) + '%' : '100%';
+      return barRow(i+1, s.code, s.name, s.gc, ' GC', color, barPct);
+    }).join('');
+
+    const rankHTML = st.ranked.map(s => {
+      const rankColor = s.rank <= 3 ? medal[s.rank-1] : s.rank <= 8 ? '#FFD400' : s.rank <= 24 ? '#9a9ab5' : '#5a5a78';
+      const bg      = s.rank <= 8  ? 'rgba(255,212,0,.06)' : s.rank <= 24 ? 'transparent' : 'rgba(255,255,255,.015)';
+      const accent  = s.rank <= 8  ? '#FFD400' : s.rank <= 24 ? '#2A3FE5' : '#3a3a52';
+      const codeClr = s.rank <= 24 ? '#fff' : '#7a7a9a';
+      const ptsClr  = s.rank <= 8  ? '#FFD400' : '#c8c8e0';
+      const dgStr   = (s.dg > 0 ? '+' : '') + s.dg;
+      return `<div style="display:grid;grid-template-columns:2.6em minmax(0,1fr) 2.4em 2.1em 2.1em 2.1em 2.6em;align-items:center;padding:.5em .6em;border-left:3px solid ${accent};background:${bg};border-bottom:1px dotted rgba(255,255,255,.06);font-family:'Space Mono',monospace;font-size:12px">
+        <span style="font-family:'Press Start 2P',monospace;font-size:9px;color:${rankColor}">${s.rank}</span>
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+          <span style="font-weight:700;color:${codeClr}">${esc(s.code)}</span>
+          <span style="color:#7a7a9a;font-size:11px"> ${esc(s.name)}</span>
+        </span>
+        <span style="text-align:center;color:#9a9ab5">${s.group}</span>
+        <span style="text-align:center;color:#c8c8e0">${s.pj}</span>
+        <span style="text-align:center;color:#9a9ab5">${s.gf}</span>
+        <span style="text-align:center;color:#c8c8e0">${dgStr}</span>
+        <span style="text-align:center;font-weight:700;color:${ptsClr}">${s.pts}</span>
+      </div>`;
+    }).join('');
+
+    root.innerHTML = `
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:18px">
+        <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:18px">
+          <div style="font-size:10px;color:#6f6f99;letter-spacing:.1em;margin-bottom:12px">GOLES TOTALES</div>
+          <div style="font-family:'Press Start 2P',monospace;font-size:22px;color:#FFD400">${st.totalGoals}</div>
+        </div>
+        <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:18px">
+          <div style="font-size:10px;color:#6f6f99;letter-spacing:.1em;margin-bottom:12px">PARTIDOS JUGADOS</div>
+          <div style="font-family:'Press Start 2P',monospace;font-size:22px;color:#16A34A">${st.mp}</div>
+        </div>
+        <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:18px">
+          <div style="font-size:10px;color:#6f6f99;letter-spacing:.1em;margin-bottom:12px">PROMEDIO GOLES/PARTIDO</div>
+          <div style="font-family:'Press Start 2P',monospace;font-size:22px;color:#F4B9B0">${st.avg}</div>
+        </div>
+        <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:18px">
+          <div style="font-size:10px;color:#6f6f99;letter-spacing:.1em;margin-bottom:12px">EMPATES</div>
+          <div style="font-family:'Press Start 2P',monospace;font-size:22px;color:#9a9ab5">${st.draws}</div>
+        </div>
+      </div>
+
+      <div style="background:#11110a;border:2px dotted #FFD400;border-radius:8px;padding:18px 20px;margin-bottom:26px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+        <span style="font-size:24px">&#128293;</span>
+        <div>
+          <div style="font-size:10px;color:#6f6f99;letter-spacing:.1em;margin-bottom:8px">GOLEADA M&Aacute;S GRANDE</div>
+          <div style="font-family:'Press Start 2P',monospace;font-size:18px;color:#FFD400;letter-spacing:.02em">${biggestText}</div>
+          <div style="font-size:11px;color:#7a7a9a;margin-top:7px">${biggestSub}</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin-bottom:30px">
+        <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:20px">
+          <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#16A34A;letter-spacing:.04em;margin-bottom:18px">&#9889; MEJORES ATAQUES</div>
+          <div style="display:flex;flex-direction:column;gap:13px">${topAttHTML}</div>
+        </div>
+        <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:20px">
+          <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#2A3FE5;letter-spacing:.04em;margin-bottom:18px">&#128737; MEJORES DEFENSAS</div>
+          <div style="display:flex;flex-direction:column;gap:13px">${topDefHTML}</div>
+        </div>
+      </div>
+
+      <div style="font-family:'Press Start 2P',monospace;font-size:12px;color:#fff;letter-spacing:.04em;margin-bottom:6px">RANKING GLOBAL &middot; 48 SELECCIONES</div>
+      <p style="font-size:11px;color:#6f6f99;margin:0 0 16px;line-height:1.6">
+        Ordenado por puntos, diferencia de gol y goles a favor.
+        <span style="color:#FFD400">Top 8 en dorado</span>.
+      </p>
+      <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:14px;overflow-x:auto">
+        <div style="min-width:420px">
+          <div style="display:grid;grid-template-columns:2.6em minmax(0,1fr) 2.4em 2.1em 2.1em 2.1em 2.6em;align-items:center;padding:0 .6em .55em;color:#6f6f99;font-size:11px;letter-spacing:.04em;border-bottom:2px dotted #2A3FE5">
+            <span>#</span><span>EQUIPO</span><span style="text-align:center">GRP</span><span style="text-align:center">PJ</span><span style="text-align:center">GF</span><span style="text-align:center">DG</span><span style="text-align:center">PTS</span>
+          </div>
+          ${rankHTML}
+        </div>
+      </div>`;
+  }
+
+  renderStats();
+})();
+</script>

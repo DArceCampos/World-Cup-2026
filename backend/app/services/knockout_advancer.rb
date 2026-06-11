@@ -29,14 +29,23 @@ class KnockoutAdvancer
 
   # Construye los dieciseisavos de final (16 partidos / 32 equipos).
   # Debe llamarse cuando todos los grupos están completos.
+  #
+  # Emparejamiento cruzado FIFA 2026: los grupos se emparejan en pares
+  # (A,B), (C,D), (E,F), (G,H), (I,J), (K,L). Dentro de cada par:
+  #   Primera mitad del bracket: 1°(G_impar) vs 2°(G_par)
+  #   Segunda mitad del bracket: 1°(G_par)   vs 2°(G_impar)
+  # Garantiza que dos equipos del mismo grupo solo puedan cruzarse en la Final.
   def build_round_of_32
     raise NotReady, "Aún hay partidos de grupo pendientes" unless all_groups_completed?
 
-    qualifiers = collect_qualifiers
-    raise NotReady, "No hay 32 clasificados" unless qualifiers.size == 32
+    groups = @tournament.groups.order(:name)
+    thirds = @tournament.best_third_places
+
+    raise NotReady, "Se necesitan 12 grupos" unless groups.size == 12
+    raise NotReady, "No hay suficientes mejores terceros (#{thirds.size}/8)" unless thirds.size == 8
 
     ActiveRecord::Base.transaction do
-      create_matches_for_phase("r32", qualifiers)
+      seed_round_of_32(groups, thirds)
       @tournament.update!(status: "knockout")
     end
   end
@@ -73,9 +82,27 @@ class KnockoutAdvancer
     @tournament.groups.all?(&:completed?)
   end
 
-  # 24 directos (1° y 2° de cada grupo) + 8 mejores terceros.
-  def collect_qualifiers
-    @tournament.groups.flat_map(&:qualified_teams) + @tournament.best_third_places
+  # Siembra los 16 partidos de dieciseisavos con cruce cruzado entre grupos.
+  # Primera mitad (rounds 1-8):  1°G_impar vs 2°G_par  + mejores terceros 1-4
+  # Segunda mitad (rounds 9-16): 1°G_par   vs 2°G_impar + mejores terceros 5-8
+  def seed_round_of_32(groups, thirds)
+    pairs = groups.each_slice(2).to_a  # [[A,B],[C,D],[E,F],[G,H],[I,J],[K,L]]
+
+    first_half  = pairs.map { |g1, g2| [g1.standings[0], g2.standings[1]] }
+    second_half = pairs.map { |g1, g2| [g2.standings[0], g1.standings[1]] }
+
+    first_half  += [[thirds[0], thirds[1]], [thirds[2], thirds[3]]]
+    second_half += [[thirds[4], thirds[5]], [thirds[6], thirds[7]]]
+
+    (first_half + second_half).each_with_index do |(home, away), i|
+      @tournament.matches.create!(
+        phase:        "r32",
+        round_number: i + 1,
+        home_team:    home,
+        away_team:    away,
+        status:       "scheduled"
+      )
+    end
   end
 
   # Crea los partidos de una fase emparejando equipos de dos en dos.

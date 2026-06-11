@@ -79,7 +79,8 @@
   <% [
     { title: "GRUPOS",        desc: "12 grupos · tablas de posiciones",       href: groups_path,   dot: "#2A3FE5" },
     { title: "PARTIDOS",      desc: "Registra y edita resultados de grupos",  href: matches_path,  dot: "#F4B9B0" },
-    { title: "ELIMINATORIAS", desc: "Bracket completo hasta la final",        href: knockout_path, dot: "#16A34A" }
+    { title: "ELIMINATORIAS", desc: "Bracket completo hasta la final",        href: knockout_path, dot: "#16A34A" },
+    { title: "ESTADÍSTICAS",  desc: "Ranking global, ataques y defensas",     href: stats_path,    dot: "#FFD400" }
   ].each do |link| %>
     <%= link_to link[:href],
           class: "card-link",

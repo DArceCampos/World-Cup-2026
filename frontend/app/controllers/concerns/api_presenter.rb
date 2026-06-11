@@ -165,15 +165,19 @@ module ApiPresenter
     away_wins = winner_id && winner_id == away_team["id"]
 
     {
-      home:       { code: team_code(home_team["name"]), name: home_team["name"] },
-      away:       { code: team_code(away_team["name"]), name: away_team["name"] },
-      home_goals: home_goals,
-      away_goals: away_goals,
-      home_bg:    home_wins ? "rgba(255,212,0,.12)" : "transparent",
-      away_bg:    away_wins ? "rgba(255,212,0,.12)" : "transparent",
-      home_color: away_wins ? "#5a5a78" : "#fff",
-      away_color: home_wins ? "#5a5a78" : "#fff",
-      pen_text:   pen_text
+      id:           api_match["id"],
+      phase:        api_match["phase"],
+      round_number: api_match["round_number"],
+      played:       played,
+      home:         { code: team_code(home_team["name"]), name: home_team["name"] },
+      away:         { code: team_code(away_team["name"]), name: away_team["name"] },
+      home_goals:   home_goals,
+      away_goals:   away_goals,
+      home_bg:      home_wins ? "rgba(255,212,0,.12)" : "transparent",
+      away_bg:      away_wins ? "rgba(255,212,0,.12)" : "transparent",
+      home_color:   away_wins ? "#5a5a78" : "#fff",
+      away_color:   home_wins ? "#5a5a78" : "#fff",
+      pen_text:     pen_text
     }
   end
 
