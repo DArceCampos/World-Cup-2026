@@ -31,4 +31,11 @@ class MatchesController < ApplicationController
   rescue StandardError
     redirect_back fallback_location: matches_path, alert: "Error al guardar resultado"
   end
+
+  def simulate
+    ApiClient.simulate_match(params[:id])
+    redirect_back fallback_location: matches_path, notice: "Partido simulado"
+  rescue StandardError => e
+    redirect_back fallback_location: matches_path, alert: "Error al simular: #{e.message}"
+  end
 end

@@ -16,6 +16,13 @@ class GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  def simulate
+    ApiClient.simulate_group(params[:id])
+    redirect_to group_path(params[:id]), notice: "Grupo simulado"
+  rescue StandardError => e
+    redirect_to group_path(params[:id]), alert: "Error al simular: #{e.message}"
+  end
+
   private
 
   def compute_best_thirds(raw_groups)

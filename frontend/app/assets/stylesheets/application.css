@@ -63,6 +63,7 @@ input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin
 .group-detail-link:hover { color: #FFD400 !important; border-color: #FFD400 !important; }
 
 .btn-register:hover { background: #FFD400 !important; color: #000 !important; }
+.btn-simulate:hover { background: #2A3FE5 !important; color: #fff !important; }
 .btn-edit:hover { color: #fff !important; border-color: #6f6f99 !important; }
 .btn-clear:hover { color: #DC2626 !important; border-color: #DC2626 !important; }
 .back-link:hover { color: #FFD400 !important; }

@@ -1,19 +1,18 @@
 class DashboardController < ApplicationController
-  TOTAL_GROUP_MATCHES = 72
-
   def index
-    tournament = ApiClient.tournament
-    groups     = ApiClient.groups
+    tournament  = ApiClient.tournament
+    all_matches = ApiClient.matches
 
-    played  = played_group_matches(groups)
-    pending = TOTAL_GROUP_MATCHES - played
-    pct     = (played.to_f / TOTAL_GROUP_MATCHES * 100).round
+    total  = all_matches.size
+    played = all_matches.count { |m| m["status"] == "played" }
+    pending = total - played
+    pct     = total > 0 ? (played.to_f / total * 100).round : 0
 
     @tournament = {
       status:   tournament["status"],
       phase:    phase_display(tournament["status"]),
       played:   played,
-      total:    TOTAL_GROUP_MATCHES,
+      total:    total,
       pending:  pending,
       pct:      pct,
       finished: tournament["status"] == "finished"
@@ -23,7 +22,7 @@ class DashboardController < ApplicationController
     @third     = team_brief(tournament["third_place"])
   rescue StandardError
     @tournament = { status: "error", phase: "BACKEND NO DISPONIBLE", played: 0,
-                    total: TOTAL_GROUP_MATCHES, pending: TOTAL_GROUP_MATCHES, pct: 0, finished: false }
+                    total: 0, pending: 0, pct: 0, finished: false }
     @champion = @runner_up = @third = nil
   end
 end

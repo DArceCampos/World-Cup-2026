@@ -168,7 +168,7 @@
 
     <div style="display:flex;gap:10px;margin-top:24px">
       <button id="km-save" style="flex:1;cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px;border-radius:6px;background:#FFD400;color:#000;border:none">GUARDAR</button>
-      <button id="km-clear" style="display:none;cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px;border-radius:6px;background:transparent;color:#DC2626;border:2px dotted #DC2626">LIMPIAR</button>
+      <button id="km-simulate" class="btn-simulate" style="cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px;border-radius:6px;background:transparent;color:#7B93FF;border:2px dotted #2A3FE5">SIMULAR</button>
       <button id="km-close" style="cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px 16px;border-radius:6px;background:transparent;color:#9a9ab5;border:2px dotted #3a3a52">X</button>
     </div>
   </div>
@@ -290,6 +290,40 @@
     });
   }
 
+  function simulateModal() {
+    if (!currentId) return;
+    var btn = document.getElementById('km-simulate');
+    btn.textContent = 'SIMULANDO...';
+    btn.disabled = true;
+
+    var csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    var csrfToken = csrfMeta ? csrfMeta.content : '';
+
+    fetch('/knockout/matches/' + currentId + '/simulate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrfToken }
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        window.location.reload();
+      } else {
+        var errEl = document.getElementById('km-err');
+        errEl.textContent = data.error || 'Error al simular.';
+        errEl.style.display = 'block';
+        btn.textContent = 'SIMULAR';
+        btn.disabled = false;
+      }
+    })
+    .catch(function() {
+      var errEl = document.getElementById('km-err');
+      errEl.textContent = 'Error de conexion.';
+      errEl.style.display = 'block';
+      btn.textContent = 'SIMULAR';
+      btn.disabled = false;
+    });
+  }
+
   function onGoalInput() {
     const gh = parseInt(document.getElementById('km-gh').value, 10);
     const ga = parseInt(document.getElementById('km-ga').value, 10);
@@ -306,6 +340,7 @@
     });
 
     document.getElementById('km-save').addEventListener('click', saveModal);
+    document.getElementById('km-simulate').addEventListener('click', simulateModal);
     document.getElementById('km-close').addEventListener('click', closeModal);
     document.getElementById('km-gh').addEventListener('input', onGoalInput);
     document.getElementById('km-ga').addEventListener('input', onGoalInput);

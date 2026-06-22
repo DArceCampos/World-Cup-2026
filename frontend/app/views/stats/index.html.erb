@@ -26,7 +26,7 @@ window.STATS_DATA = <%= raw @stats_data %>;
       mp++; totalGoals += m.hg + m.ag;
       var diff = Math.abs(m.hg - m.ag);
       if (!biggest || diff > biggest.diff) {
-        biggest = { diff: diff, f: { h: { code: m.home_code }, a: { code: m.away_code }, group: m.group }, r: [m.hg, m.ag] };
+        biggest = { diff: diff, f: { h: { code: m.home_code }, a: { code: m.away_code }, phase: m.phase }, r: [m.hg, m.ag] };
       }
       if (m.hg === m.ag) draws++;
     });
@@ -75,7 +75,7 @@ window.STATS_DATA = <%= raw @stats_data %>;
       ? `${esc(st.biggest.f.h.code)} ${st.biggest.r[0]}-${st.biggest.r[1]} ${esc(st.biggest.f.a.code)}`
       : '&mdash;';
     const biggestSub = st.biggest
-      ? `Grupo ${st.biggest.f.group} &middot; diferencia de ${st.biggest.diff}`
+      ? `${st.biggest.f.phase} &middot; diferencia de ${st.biggest.diff}`
       : 'Sin partidos jugados';
 
     const topAttHTML = st.topAtt.map((s, i) => {

@@ -44,6 +44,14 @@ class KnockoutController < ApplicationController
     @third     = nil
   end
 
+  def simulate
+    ApiClient.simulate_match(params[:id])
+    ApiClient.tournament_advance
+    render json: { ok: true }
+  rescue StandardError => e
+    render json: { ok: false, error: e.message }, status: :unprocessable_entity
+  end
+
   def result
     goals = {
       home_goals:       params[:home_goals].to_i,

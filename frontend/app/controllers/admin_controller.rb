@@ -3,11 +3,17 @@ class AdminController < ApplicationController
     tournament = ApiClient.tournament
     raw_groups = ApiClient.groups
     raw_teams  = ApiClient.teams
+    all_matches = ApiClient.matches
 
-    played = played_group_matches(raw_groups)
-    total  = 72
-    pct    = played > 0 ? (played.to_f / total * 100).round : 0
-    done   = played >= total
+    group_played = played_group_matches(raw_groups)
+    group_total  = 72
+    group_pct    = group_played > 0 ? (group_played.to_f / group_total * 100).round : 0
+
+    total_played = all_matches.count { |m| m["status"] == "played" }
+    total_all    = all_matches.size
+    total_pct    = total_all > 0 ? (total_played.to_f / total_all * 100).round : 0
+
+    status = tournament["status"]
 
     group_name_by_id = raw_groups.each_with_object({}) { |g, h| h[g["id"]] = g["name"] }
 
@@ -19,25 +25,40 @@ class AdminController < ApplicationController
     end
 
     @admin_data = {
-      status:  tournament["status"],
-      played:  played,
-      total:   total,
-      pending: total - played,
-      pct:     pct,
-      done:    done
+      status:        status,
+      status_label:  phase_display(status),
+      group_played:  group_played,
+      group_total:   group_total,
+      group_pct:     group_pct,
+      group_done:    group_played >= group_total,
+      total_played:  total_played,
+      total_all:     total_all,
+      total_pct:     total_pct,
+      finished:      status == "finished"
     }
     @teams_data = teams_by_group
   rescue StandardError
-    @admin_data = { status: "setup", played: 0, total: 72, pending: 72, pct: 0, done: false }
+    @admin_data = {
+      status: "setup", status_label: "CONFIGURACIÓN",
+      group_played: 0, group_total: 72, group_pct: 0, group_done: false,
+      total_played: 0, total_all: 72, total_pct: 0, finished: false
+    }
     @teams_data = {}
   end
 
   def simulate
     ApiClient.simulate_groups
     ApiClient.tournament_advance
-    redirect_to admin_path, notice: "Simulación ejecutada. Fase eliminatoria habilitada."
+    redirect_to admin_path, notice: "Fase de grupos simulada. Eliminatorias habilitadas."
   rescue StandardError => e
-    redirect_to admin_path, alert: "Error al simular: #{e.message}"
+    redirect_to admin_path, alert: "Error al simular grupos: #{e.message}"
+  end
+
+  def simulate_tournament
+    ApiClient.simulate_tournament
+    redirect_to admin_path, notice: "Torneo completo simulado. ¡Ya hay campeón!"
+  rescue StandardError => e
+    redirect_to admin_path, alert: "Error al simular torneo: #{e.message}"
   end
 
   def reset_groups

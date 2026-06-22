@@ -71,6 +71,11 @@
             class: "btn-register",
             style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.04em;padding:10px;border-radius:4px;background:transparent;color:#FFD400;border:2px dotted #FFD400;width:100%" %>
     <% end %>
+    <%= form_with url: match_simulate_path(match[:id]), method: :post, local: true do |f| %>
+      <%= f.submit "SIMULAR PARTIDO",
+            class: "btn-simulate",
+            style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.04em;padding:10px;border-radius:4px;background:transparent;color:#7B93FF;border:2px dotted #2A3FE5;width:100%" %>
+    <% end %>
   <% end %>
 
 </div>

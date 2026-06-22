@@ -1,11 +1,21 @@
-<%# Panel de administración — gestión de datos del torneo (client-side, localStorage) %>
+<%# Panel de administración — gestión y simulación del torneo %>
 
-<h1 style="font-family:'Press Start 2P',monospace;font-size:clamp(18px,5vw,24px);color:#FFD400;margin:0 0 8px;letter-spacing:.02em">
-  PANEL ADMIN
-</h1>
-<p style="font-size:12px;color:#7a7a9a;margin:0 0 26px;line-height:1.6">
-  Gestiona los datos del torneo. Todo se guarda automáticamente en este navegador.
-</p>
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+  <div>
+    <h1 style="font-family:'Press Start 2P',monospace;font-size:clamp(18px,5vw,24px);color:#FFD400;margin:0 0 8px;letter-spacing:.02em">
+      PANEL ADMIN
+    </h1>
+    <p style="font-size:12px;color:#7a7a9a;margin:0;line-height:1.6">
+      Centro de control del torneo. Simula, reinicia y gestiona selecciones.
+    </p>
+  </div>
+  <span style="font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.06em;padding:8px 14px;border-radius:4px;
+    background:<%= @admin_data[:finished] ? 'rgba(22,163,74,.15)' : @admin_data[:group_done] ? 'rgba(245,158,11,.12)' : 'rgba(42,63,229,.12)' %>;
+    color:<%= @admin_data[:finished] ? '#16A34A' : @admin_data[:group_done] ? '#F59E0B' : '#7B93FF' %>;
+    border:1px solid <%= @admin_data[:finished] ? '#16A34A' : @admin_data[:group_done] ? '#F59E0B' : '#2A3FE5' %>">
+    <%= @admin_data[:status_label] %>
+  </span>
+</div>
 
 <%# Mensaje de feedback %>
 <div id="admin-msg-box" style="display:none;background:rgba(255,212,0,.08);border:2px dotted #FFD400;border-radius:6px;padding:14px 16px;margin-bottom:24px;align-items:center;gap:12px">
@@ -13,126 +23,124 @@
   <span id="admin-msg-text" style="font-family:'Space Mono',monospace;font-size:12px;color:#FFD400;letter-spacing:.03em"></span>
 </div>
 
-<%# Estado de los datos %>
-<div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px;margin-bottom:20px">
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px">
-    <span style="font-size:11px;color:#6f6f99;letter-spacing:.1em">ESTADO DE LOS DATOS</span>
-    <span id="admin-state-text" style="font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;color:<%= @admin_data[:done] ? '#16A34A' : '#F59E0B' %>">
-      <%= @admin_data[:done] ? 'FASE DE GRUPOS COMPLETA' : 'EN CURSO' %>
-    </span>
+<%# Progreso del torneo %>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px">
+  <%# Fase de grupos %>
+  <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <span style="font-family:'Press Start 2P',monospace;font-size:9px;color:#7B93FF;letter-spacing:.06em">FASE DE GRUPOS</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:<%= @admin_data[:group_done] ? '#16A34A' : '#9a9ab5' %>">
+        <%= @admin_data[:group_played] %> / <%= @admin_data[:group_total] %>
+      </span>
+    </div>
+    <div style="height:8px;background:#000;border:1px solid #2A3FE5;border-radius:4px;overflow:hidden;margin-bottom:8px">
+      <div class="progress-bar" style="width:<%= @admin_data[:group_pct] %>%;background:<%= @admin_data[:group_done] ? '#16A34A' : '#2A3FE5' %>"></div>
+    </div>
+    <span style="font-size:10px;color:#6f6f99"><%= @admin_data[:group_total] - @admin_data[:group_played] %> partidos pendientes</span>
   </div>
-  <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:12px">
-    <span id="admin-played" style="font-family:'Press Start 2P',monospace;font-size:18px;color:#16A34A"><%= @admin_data[:played] %></span>
-    <span style="color:#6f6f99;font-size:13px">/ <span id="admin-total"><%= @admin_data[:total] %></span> partidos &middot; <span id="admin-pending-count"><%= @admin_data[:pending] %></span> pendientes</span>
-  </div>
-  <div style="height:10px;background:#000;border:1px solid #2A3FE5;border-radius:5px;overflow:hidden">
-    <div id="admin-progress-bar" class="progress-bar" style="width:<%= @admin_data[:pct] %>%"></div>
+
+  <%# Torneo completo %>
+  <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:20px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <span style="font-family:'Press Start 2P',monospace;font-size:9px;color:#FFD400;letter-spacing:.06em">TORNEO COMPLETO</span>
+      <span style="font-family:'Space Mono',monospace;font-size:11px;color:<%= @admin_data[:finished] ? '#16A34A' : '#9a9ab5' %>">
+        <%= @admin_data[:total_played] %> / <%= @admin_data[:total_all] %>
+      </span>
+    </div>
+    <div style="height:8px;background:#000;border:1px solid #2A3FE5;border-radius:4px;overflow:hidden;margin-bottom:8px">
+      <div class="progress-bar" style="width:<%= @admin_data[:total_pct] %>%;background:<%= @admin_data[:finished] ? '#16A34A' : '#FFD400' %>"></div>
+    </div>
+    <span style="font-size:10px;color:#6f6f99"><%= @admin_data[:total_all] - @admin_data[:total_played] %> partidos pendientes</span>
   </div>
 </div>
 
-<%# Generar datos %>
+<%# Simulaciones %>
 <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px;margin-bottom:20px">
-  <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#fff;letter-spacing:.04em;margin-bottom:6px">GENERAR DATOS</div>
+  <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#fff;letter-spacing:.04em;margin-bottom:6px">SIMULACIONES</div>
   <p style="font-size:11px;color:#7a7a9a;margin:0 0 18px;line-height:1.6">
-    Estas acciones sobrescriben todos los resultados de la fase de grupos.
+    Genera resultados aleatorios para los partidos pendientes. Las simulaciones son idempotentes: no afectan partidos ya jugados.
   </p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
     <%= form_with url: admin_simulate_path, method: :post, local: true, style: "display:contents" do |f| %>
-      <%= f.button type: "submit", class: "admin-btn-yellow", style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px;border-radius:5px;background:transparent;color:#FFD400;border:2px dotted #FFD400;line-height:1.6" do %>
+      <%= f.button type: "submit", class: "admin-btn", style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:16px;border-radius:6px;background:transparent;color:#7B93FF;border:2px solid #2A3FE5;line-height:1.8;text-align:center;transition:all .2s" do %>
+        <span style="font-size:16px;display:block;margin-bottom:6px">&#9917;</span>
         SIMULAR<br/>FASE GRUPOS
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:8px;color:#6f6f99;margin-top:6px">72 partidos de grupo</span>
       <% end %>
     <% end %>
-    <%= form_with url: admin_reset_groups_path, method: :post, local: true, style: "display:contents",
-          data: { confirm: "Esto borrará todos los resultados de grupos y eliminatorias. ¿Continuar?" } do |f| %>
-      <%= f.button type: "submit", class: "admin-btn-red", style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px;border-radius:5px;background:transparent;color:#DC2626;border:2px dotted #DC2626;line-height:1.6" do %>
-        REINICIAR<br/>TORNEO
+
+    <%= form_with url: admin_simulate_tournament_path, method: :post, local: true, style: "display:contents" do |f| %>
+      <%= f.button type: "submit", class: "admin-btn-gold", style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:16px;border-radius:6px;background:transparent;color:#FFD400;border:2px solid #FFD400;line-height:1.8;text-align:center;transition:all .2s" do %>
+        <span style="font-size:16px;display:block;margin-bottom:6px">&#127942;</span>
+        SIMULAR<br/>TORNEO COMPLETO
+        <span style="display:block;font-family:'Space Mono',monospace;font-size:8px;color:#6f6f99;margin-top:6px">Grupos + eliminatorias + final</span>
       <% end %>
     <% end %>
   </div>
 </div>
 
-<%# Exportar / Importar %>
-<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:20px">
-  <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px">
-    <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#fff;letter-spacing:.04em;margin-bottom:6px">EXPORTAR</div>
-    <p style="font-size:11px;color:#7a7a9a;margin:0 0 18px;line-height:1.6">
-      Descarga todos los resultados como archivo JSON para respaldo o para compartir.
-    </p>
-    <button id="btn-export" style="cursor:pointer;width:100%;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px;border-radius:5px;background:#FFD400;color:#000;border:none">
-      &#11015; DESCARGAR JSON
-    </button>
-  </div>
-  <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px">
-    <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#fff;letter-spacing:.04em;margin-bottom:6px">IMPORTAR</div>
-    <p style="font-size:11px;color:#7a7a9a;margin:0 0 14px;line-height:1.6">
-      Pega un JSON exportado para cargar equipos reales o un torneo guardado.
-    </p>
-    <textarea id="import-text" placeholder='{ "GA-0": [2,1], ... }' style="width:100%;height:92px;resize:vertical;background:#000;color:#c8c8e0;border:2px dotted #3a3a52;border-radius:5px;padding:10px;font-family:'Space Mono',monospace;font-size:12px;outline:none;margin-bottom:12px"></textarea>
-    <button id="btn-import" style="cursor:pointer;width:100%;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px;border-radius:5px;background:transparent;color:#FFD400;border:2px dotted #FFD400">
-      &#11014; CARGAR JSON
-    </button>
-  </div>
-</div>
-
-<%# Reset eliminatorias %>
-<div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px;margin-bottom:20px">
-  <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#fff;letter-spacing:.04em;margin-bottom:6px">ELIMINATORIAS</div>
-  <p style="font-size:11px;color:#7a7a9a;margin:0 0 16px;line-height:1.6">
-    Borra todos los marcadores registrados de la fase de eliminación directa (no afecta la fase de grupos).
+<%# Zona de peligro %>
+<div style="background:#0b0b16;border:2px dotted #DC2626;border-radius:8px;padding:22px;margin-bottom:20px">
+  <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#DC2626;letter-spacing:.04em;margin-bottom:6px">ZONA DE PELIGRO</div>
+  <p style="font-size:11px;color:#7a7a9a;margin:0 0 18px;line-height:1.6">
+    Esta accion borra todos los resultados. No se puede deshacer.
   </p>
-  <button id="btn-reset-knock" style="cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:13px 16px;border-radius:5px;background:transparent;color:#DC2626;border:2px dotted #DC2626">
-    BORRAR ELIMINATORIAS
-  </button>
+  <%= form_with url: admin_reset_groups_path, method: :post, local: true,
+        data: { confirm: "Esto borrara todos los resultados de grupos y eliminatorias. ¿Continuar?" } do |f| %>
+    <%= f.button type: "submit", class: "admin-btn-red", style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px 16px;border-radius:6px;background:transparent;color:#DC2626;border:2px dotted #DC2626;line-height:1.8;text-align:center;transition:all .2s" do %>
+      REINICIAR TORNEO
+      <span style="display:block;font-family:'Space Mono',monospace;font-size:8px;color:#6f6f99;margin-top:4px">Borra grupos y eliminatorias</span>
+    <% end %>
+  <% end %>
 </div>
 
 <%# CRUD de selecciones %>
 <div style="background:#0b0b16;border:2px dotted #2A3FE5;border-radius:8px;padding:22px">
   <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px">
     <div style="font-family:'Press Start 2P',monospace;font-size:10px;color:#fff;letter-spacing:.04em">SELECCIONES &amp; GRUPOS</div>
-    <button id="btn-reset-teams" style="cursor:pointer;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.04em;padding:10px 12px;border-radius:4px;background:transparent;color:#9a9ab5;border:1px dotted #3a3a52">
+    <button id="btn-reset-teams" style="cursor:pointer;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.04em;padding:10px 12px;border-radius:4px;background:transparent;color:#9a9ab5;border:1px dotted #3a3a52;transition:all .2s">
       RESTAURAR 48
     </button>
   </div>
   <p style="font-size:11px;color:#7a7a9a;margin:0 0 16px;line-height:1.6">
-    Edita el código y el país de cada selección por grupo, o elimina una para dejar el cupo "Por definir". Los cambios se guardan al instante.
+    Edita el nombre de cada seleccion por grupo. Los cambios se guardan al instante.
   </p>
   <div id="admin-team-msg" style="display:none;background:rgba(255,212,0,.08);border:1px dotted #FFD400;border-radius:5px;padding:10px 13px;margin-bottom:16px;font-family:'Space Mono',monospace;font-size:12px;color:#FFD400"></div>
   <div id="teams-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px"></div>
 </div>
 
 <style>
-  .admin-btn-yellow:hover { background:#FFD400 !important; color:#000 !important; }
-  .admin-btn-green:hover  { background:#16A34A !important; color:#000 !important; }
-  .admin-btn-red:hover    { background:#DC2626 !important; color:#fff !important; }
-  #btn-reset-knock:hover  { background:#DC2626 !important; color:#fff !important; }
-  #btn-reset-teams:hover  { color:#FFD400 !important; border-color:#FFD400 !important; }
-  #btn-import:hover       { background:#FFD400 !important; color:#000 !important; }
+  .admin-btn:hover       { background:#2A3FE5 !important; color:#fff !important; }
+  .admin-btn-gold:hover  { background:#FFD400 !important; color:#000 !important; }
+  .admin-btn-red:hover   { background:#DC2626 !important; color:#fff !important; }
+  #btn-reset-teams:hover { color:#FFD400 !important; border-color:#FFD400 !important; }
 </style>
 
 <script>
 window.ADMIN_TEAMS = <%= raw @teams_data.to_json %>;
 (function() {
-  const GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L'];
+  var GROUPS = ['A','B','C','D','E','F','G','H','I','J','K','L'];
 
   function escAttr(s) {
     return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
   function showMsg(text) {
-    const box = document.getElementById('admin-msg-box');
+    var box = document.getElementById('admin-msg-box');
     document.getElementById('admin-msg-text').textContent = text;
     box.style.display = 'flex';
+    setTimeout(function() { box.style.display = 'none'; }, 4000);
   }
 
   function showTeamMsg(text) {
-    const el = document.getElementById('admin-team-msg');
+    var el = document.getElementById('admin-team-msg');
     el.textContent = text;
     el.style.display = text ? 'block' : 'none';
   }
 
   function renderTeams() {
-    const teams = window.ADMIN_TEAMS;
-    const grid  = document.getElementById('teams-grid');
+    var teams = window.ADMIN_TEAMS;
+    var grid  = document.getElementById('teams-grid');
     if (!teams || Object.keys(teams).length === 0) {
       grid.innerHTML = '<p style="color:#6f6f99;font-size:12px">No hay datos de equipos disponibles.</p>';
       return;
@@ -143,10 +151,10 @@ window.ADMIN_TEAMS = <%= raw @teams_data.to_json %>;
         '<div style="display:flex;flex-direction:column;gap:8px">' +
         teams[g].map(function(t, i) {
           return '<div style="display:grid;grid-template-columns:3.6em minmax(0,1fr);gap:7px;align-items:center">' +
-            '<span class="t-code-disp" style="height:34px;line-height:34px;text-align:center;background:#0b0b16;color:#FFD400;border:1px dotted #3a3a52;border-radius:4px;font-family:\'Space Mono\',monospace;font-weight:700;font-size:11px;display:block">' + escAttr(t.code) + '</span>' +
+            '<span style="height:34px;line-height:34px;text-align:center;background:#0b0b16;color:#FFD400;border:1px dotted #3a3a52;border-radius:4px;font-family:\'Space Mono\',monospace;font-weight:700;font-size:11px;display:block">' + escAttr(t.code) + '</span>' +
             '<input class="t-name" data-g="' + g + '" data-i="' + i + '" data-id="' + t.id + '"' +
-            ' value="' + escAttr(t.name) + '" placeholder="País"' +
-            ' style="width:100%;height:34px;background:#000;color:#e8e8f5;border:1px dotted #3a3a52;border-radius:4px;font-family:\'Space Mono\',monospace;font-size:12px;padding:0 9px;outline:none" />' +
+            ' value="' + escAttr(t.name) + '" placeholder="Pais"' +
+            ' style="width:100%;height:34px;background:#000;color:#e8e8f5;border:1px dotted #3a3a52;border-radius:4px;font-family:\'Space Mono\',monospace;font-size:12px;padding:0 9px;outline:none;transition:border-color .2s" />' +
             '</div>';
         }).join('') +
         '</div></div>';
@@ -161,8 +169,8 @@ window.ADMIN_TEAMS = <%= raw @teams_data.to_json %>;
 
   function updateTeamName(id, name, inputEl) {
     if (!id) return;
-    const csrfMeta = document.querySelector('meta[name="csrf-token"]');
-    const csrf = csrfMeta ? csrfMeta.content : '';
+    var csrfMeta = document.querySelector('meta[name="csrf-token"]');
+    var csrf = csrfMeta ? csrfMeta.content : '';
     fetch('/admin/teams/' + id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
@@ -172,34 +180,25 @@ window.ADMIN_TEAMS = <%= raw @teams_data.to_json %>;
     .then(function(data) {
       if (data.ok) {
         showTeamMsg('Guardado.');
-        setTimeout(function() { showTeamMsg(''); }, 2000);
+        if (inputEl) inputEl.style.borderColor = '#16A34A';
+        setTimeout(function() {
+          showTeamMsg('');
+          if (inputEl) inputEl.style.borderColor = '#3a3a52';
+        }, 2000);
       } else {
         showTeamMsg('Error: ' + (data.error || 'No se pudo guardar.'));
         if (inputEl) inputEl.style.borderColor = '#DC2626';
       }
     })
-    .catch(function() { showTeamMsg('Error de conexión.'); });
+    .catch(function() { showTeamMsg('Error de conexion.'); });
   }
 
-  // ---- init ----
   document.addEventListener('DOMContentLoaded', function() {
     renderTeams();
 
-    var btnExport = document.getElementById('btn-export');
-    if (btnExport) btnExport.addEventListener('click', function() {
-      showMsg('Exportación no disponible — los datos viven en el backend.');
-    });
-    var btnImport = document.getElementById('btn-import');
-    if (btnImport) btnImport.addEventListener('click', function() {
-      showMsg('Importación no disponible — los datos viven en el backend.');
-    });
-    var btnResetKnock = document.getElementById('btn-reset-knock');
-    if (btnResetKnock) btnResetKnock.addEventListener('click', function() {
-      showMsg('Usa el panel de administración del backend para borrar resultados de eliminatorias.');
-    });
     var btnResetTeams = document.getElementById('btn-reset-teams');
     if (btnResetTeams) btnResetTeams.addEventListener('click', function() {
-      showMsg('Para restaurar equipos, usa el panel de administración del backend.');
+      showMsg('Para restaurar equipos, usa el panel de administracion del backend.');
     });
   });
 })();

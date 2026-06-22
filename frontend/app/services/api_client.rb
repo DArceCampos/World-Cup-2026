@@ -49,6 +49,14 @@ module ApiClient
     get("/knockout/qualifiers")["data"]
   end
 
+  def self.simulate_match(match_id)
+    post("/simulations/match/#{match_id}", {})
+  end
+
+  def self.simulate_group(group_id)
+    post("/simulations/group/#{group_id}", {})
+  end
+
   def self.simulate_groups
     post("/simulations/groups", {})
   end

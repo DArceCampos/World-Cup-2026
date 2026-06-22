@@ -37,3 +37,24 @@
 /docs/requirements.md
 
 # --------------------------FRONTEND--------------------------
+
+# Logs generados en tiempo de ejecución.
+/frontend/log/*
+!/frontend/log/.keep
+
+# Archivos temporales (caché, PIDs del servidor, etc.).
+/frontend/tmp/*
+!/frontend/tmp/.keep
+
+# Caché de bootsnap.
+/frontend/tmp/cache/bootsnap*
+
+# Caché de Sprockets (assets compilados).
+/frontend/tmp/cache/assets/
+
+# CSS compilado de Tailwind (se regenera con bin/dev).
+/frontend/app/assets/builds/*
+!/frontend/app/assets/builds/.keep
+
+# Secretos locales.
+/frontend/config/master.key
