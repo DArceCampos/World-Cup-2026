@@ -85,8 +85,7 @@
   <p style="font-size:11px;color:#7a7a9a;margin:0 0 18px;line-height:1.6">
     Esta accion borra todos los resultados. No se puede deshacer.
   </p>
-  <%= form_with url: admin_reset_groups_path, method: :post, local: true,
-        data: { confirm: "Esto borrara todos los resultados de grupos y eliminatorias. ¿Continuar?" } do |f| %>
+  <%= form_with url: admin_reset_groups_path, method: :post, local: true, html: { id: "danger-reset-form" } do |f| %>
     <%= f.button type: "submit", class: "admin-btn-red", style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:.04em;padding:14px 16px;border-radius:6px;background:transparent;color:#DC2626;border:2px dotted #DC2626;line-height:1.8;text-align:center;transition:all .2s" do %>
       REINICIAR TORNEO
       <span style="display:block;font-family:'Space Mono',monospace;font-size:8px;color:#6f6f99;margin-top:4px">Borra grupos y eliminatorias</span>
@@ -150,31 +149,39 @@ window.ADMIN_TEAMS = <%= raw @teams_data.to_json %>;
         '<div style="font-family:\'Press Start 2P\',monospace;font-size:11px;color:#FFD400;letter-spacing:.04em;margin-bottom:12px">GRUPO ' + g + '</div>' +
         '<div style="display:flex;flex-direction:column;gap:8px">' +
         teams[g].map(function(t, i) {
-          return '<div style="display:grid;grid-template-columns:3.6em minmax(0,1fr);gap:7px;align-items:center">' +
-            '<span style="height:34px;line-height:34px;text-align:center;background:#0b0b16;color:#FFD400;border:1px dotted #3a3a52;border-radius:4px;font-family:\'Space Mono\',monospace;font-weight:700;font-size:11px;display:block">' + escAttr(t.code) + '</span>' +
-            '<input class="t-name" data-g="' + g + '" data-i="' + i + '" data-id="' + t.id + '"' +
+          return '<div class="team-row" style="display:grid;grid-template-columns:3.6em minmax(0,1fr) 2.4em;gap:7px;align-items:center">' +
+            '<input class="t-code" data-id="' + t.id + '" maxlength="3"' +
+            ' value="' + escAttr(t.code) + '" placeholder="COD"' +
+            ' style="height:34px;text-align:center;background:#0b0b16;color:#FFD400;border:1px dotted #3a3a52;border-radius:4px;font-family:\'Space Mono\',monospace;font-weight:700;font-size:11px;outline:none;text-transform:uppercase;width:100%;transition:border-color .2s" />' +
+            '<input class="t-name" data-id="' + t.id + '"' +
             ' value="' + escAttr(t.name) + '" placeholder="Pais"' +
             ' style="width:100%;height:34px;background:#000;color:#e8e8f5;border:1px dotted #3a3a52;border-radius:4px;font-family:\'Space Mono\',monospace;font-size:12px;padding:0 9px;outline:none;transition:border-color .2s" />' +
+            '<button class="t-save" data-id="' + t.id + '" title="Guardar"' +
+            ' style="height:34px;width:100%;cursor:pointer;background:transparent;color:#16A34A;border:1px dotted #16A34A;border-radius:4px;font-size:15px;line-height:1;transition:all .2s">✓</button>' +
             '</div>';
         }).join('') +
         '</div></div>';
     }).join('');
 
-    grid.querySelectorAll('.t-name').forEach(function(el) {
-      el.addEventListener('change', function(e) {
-        updateTeamName(e.target.dataset.id, e.target.value, e.target);
+    grid.querySelectorAll('.t-save').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        var row = e.target.closest('.team-row');
+        var id = e.target.dataset.id;
+        var nameEl = row.querySelector('.t-name');
+        var codeEl = row.querySelector('.t-code');
+        updateTeamField(id, { name: nameEl.value, code: codeEl.value.toUpperCase() }, btn);
       });
     });
   }
 
-  function updateTeamName(id, name, inputEl) {
+  function updateTeamField(id, fields, inputEl) {
     if (!id) return;
     var csrfMeta = document.querySelector('meta[name="csrf-token"]');
     var csrf = csrfMeta ? csrfMeta.content : '';
     fetch('/admin/teams/' + id, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
-      body: JSON.stringify({ name: name })
+      body: JSON.stringify(fields)
     })
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -196,9 +203,29 @@ window.ADMIN_TEAMS = <%= raw @teams_data.to_json %>;
   document.addEventListener('DOMContentLoaded', function() {
     renderTeams();
 
+    var dangerForm = document.getElementById('danger-reset-form');
+    if (dangerForm) dangerForm.addEventListener('submit', function(e) {
+      if (!confirm('¿Seguro que quieres reiniciar todo el torneo?\nTodo el progreso se perderá y no se puede deshacer.')) {
+        e.preventDefault();
+      }
+    });
+
     var btnResetTeams = document.getElementById('btn-reset-teams');
     if (btnResetTeams) btnResetTeams.addEventListener('click', function() {
-      showMsg('Para restaurar equipos, usa el panel de administracion del backend.');
+      if (!confirm('¿Restaurar todos los equipos a sus nombres y códigos originales?')) return;
+      var csrfMeta = document.querySelector('meta[name="csrf-token"]');
+      var csrf = csrfMeta ? csrfMeta.content : '';
+      fetch('/admin/reset_teams', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf },
+        body: JSON.stringify({})
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.ok) { location.reload(); }
+        else { showMsg('Error al restaurar: ' + (data.error || 'desconocido')); }
+      })
+      .catch(function() { showMsg('Error de conexión al restaurar.'); });
     });
   });
 })();

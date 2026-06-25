@@ -21,7 +21,7 @@ class AdminController < ApplicationController
     raw_teams.each do |t|
       letter = group_name_by_id[t["group_id"]]
       next unless letter && teams_by_group.key?(letter)
-      teams_by_group[letter] << { id: t["id"], code: team_code(t["name"]), name: t["name"] }
+      teams_by_group[letter] << { id: t["id"], code: t["code"].presence || team_code(t["name"]), name: t["name"] }
     end
 
     @admin_data = {
@@ -68,8 +68,22 @@ class AdminController < ApplicationController
     redirect_to admin_path, alert: "Error al reiniciar: #{e.message}"
   end
 
+  def advance_knockout
+    ApiClient.tournament_advance
+    redirect_to knockout_path, notice: "¡Eliminatorias iniciadas!"
+  rescue StandardError => e
+    redirect_to admin_path, alert: "Error al avanzar: #{e.message}"
+  end
+
   def update_team
-    result = ApiClient.update_team(params[:id], { name: params[:name] })
+    result = ApiClient.update_team(params[:id], { name: params[:name], code: params[:code] })
+    render json: { ok: true }
+  rescue StandardError => e
+    render json: { ok: false, error: e.message }, status: :unprocessable_entity
+  end
+
+  def reset_teams
+    ApiClient.reset_teams
     render json: { ok: true }
   rescue StandardError => e
     render json: { ok: false, error: e.message }, status: :unprocessable_entity

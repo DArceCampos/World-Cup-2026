@@ -57,24 +57,26 @@
     <div style="text-align:center;font-family:'Press Start 2P',monospace;font-size:7px;letter-spacing:.06em;color:<%= note_color %>"><%= result_note %></div>
   <% end %>
 
-  <%# Acciones %>
-  <% unless played %>
+  <%# Acciones — solo disponibles si la fase de grupos sigue activa %>
+  <% if @tournament_status == "group_stage" %>
     <%= form_with url: match_result_path(match[:id]), method: :patch, local: true, style: "display:flex;flex-direction:column;gap:8px;" do |f| %>
       <div style="display:flex;align-items:center;gap:6px;justify-content:center;">
-        <%= f.number_field :home_goals, min: 0, placeholder: "0",
+        <%= f.number_field :home_goals, min: 0, placeholder: "0", value: (played ? match[:home_goals] : nil),
               style: "width:38px;height:38px;text-align:center;font-family:'Press Start 2P',monospace;font-size:13px;background:#000;color:#FFD400;border:2px solid #FFD400;border-radius:5px;outline:none" %>
         <span style="color:#6f6f99;font-weight:700">:</span>
-        <%= f.number_field :away_goals, min: 0, placeholder: "0",
+        <%= f.number_field :away_goals, min: 0, placeholder: "0", value: (played ? match[:away_goals] : nil),
               style: "width:38px;height:38px;text-align:center;font-family:'Press Start 2P',monospace;font-size:13px;background:#000;color:#FFD400;border:2px solid #FFD400;border-radius:5px;outline:none" %>
       </div>
-      <%= f.submit "REGISTRAR RESULTADO",
+      <%= f.submit played ? "EDITAR RESULTADO" : "REGISTRAR RESULTADO",
             class: "btn-register",
             style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.04em;padding:10px;border-radius:4px;background:transparent;color:#FFD400;border:2px dotted #FFD400;width:100%" %>
     <% end %>
-    <%= form_with url: match_simulate_path(match[:id]), method: :post, local: true do |f| %>
-      <%= f.submit "SIMULAR PARTIDO",
-            class: "btn-simulate",
-            style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.04em;padding:10px;border-radius:4px;background:transparent;color:#7B93FF;border:2px dotted #2A3FE5;width:100%" %>
+    <% unless played %>
+      <%= form_with url: match_simulate_path(match[:id]), method: :post, local: true do |f| %>
+        <%= f.submit "SIMULAR PARTIDO",
+              class: "btn-simulate",
+              style: "cursor:pointer;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.04em;padding:10px;border-radius:4px;background:transparent;color:#7B93FF;border:2px dotted #2A3FE5;width:100%" %>
+      <% end %>
     <% end %>
   <% end %>
 

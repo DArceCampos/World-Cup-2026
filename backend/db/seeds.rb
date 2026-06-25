@@ -13,28 +13,28 @@ Tournament.delete_all
 puts "Creando torneo..."
 tournament = Tournament.create!(name: "Copa Mundial FIFA 2026", status: "group_stage")
 
-# 48 selecciones distribuidas en 12 grupos de 4.
+# 48 selecciones distribuidas en 12 grupos de 4: [nombre, código FIFA].
 TEAMS_BY_GROUP = {
-  "A" => ["México", "Sudáfrica", "República de Corea", "Chequia"],
-  "B" => ["Canadá", "Bosnia y Herzegovina", "Catar", "Suiza"],
-  "C" => ["Brasil", "Marruecos", "Haití", "Escocia"],
-  "D" => ["EE. UU.", "Paraguay", "Australia", "Turquía"],
-  "E" => ["Alemania", "Curazao", "Costa de Marfil", "Ecuador"],
-  "F" => ["Países Bajos", "Japón", "Suecia", "Túnez"],
-  "G" => ["Bélgica", "Egipto", "RI de Irán", "Nueva Zelanda"],
-  "H" => ["España", "Islas de Cabo Verde", "Arabia Saudí", "Uruguay"],
-  "I" => ["Francia", "Senegal", "Irak", "Noruega"],
-  "J" => ["Argentina", "Argelia", "Austria", "Jordania"],
-  "K" => ["Portugal", "RD Congo", "Uzbekistán", "Colombia"],
-  "L" => ["Inglaterra", "Croacia", "Ghana", "Panamá"]
+  "A" => [["México","MEX"],["Sudáfrica","RSA"],["República de Corea","KOR"],["Chequia","CZE"]],
+  "B" => [["Canadá","CAN"],["Bosnia y Herzegovina","BIH"],["Catar","QAT"],["Suiza","SUI"]],
+  "C" => [["Brasil","BRA"],["Marruecos","MAR"],["Haití","HAI"],["Escocia","SCO"]],
+  "D" => [["EE. UU.","USA"],["Paraguay","PAR"],["Australia","AUS"],["Turquía","TUR"]],
+  "E" => [["Alemania","GER"],["Curazao","CUW"],["Costa de Marfil","CIV"],["Ecuador","ECU"]],
+  "F" => [["Países Bajos","NED"],["Japón","JPN"],["Suecia","SWE"],["Túnez","TUN"]],
+  "G" => [["Bélgica","BEL"],["Egipto","EGY"],["RI de Irán","IRN"],["Nueva Zelanda","NZL"]],
+  "H" => [["España","ESP"],["Islas de Cabo Verde","CPV"],["Arabia Saudí","KSA"],["Uruguay","URU"]],
+  "I" => [["Francia","FRA"],["Senegal","SEN"],["Irak","IRQ"],["Noruega","NOR"]],
+  "J" => [["Argentina","ARG"],["Argelia","ALG"],["Austria","AUT"],["Jordania","JOR"]],
+  "K" => [["Portugal","POR"],["RD Congo","COD"],["Uzbekistán","UZB"],["Colombia","COL"]],
+  "L" => [["Inglaterra","ENG"],["Croacia","CRO"],["Ghana","GHA"],["Panamá","PAN"]]
 }.freeze
 
 puts "Creando grupos, equipos y fixture..."
-TEAMS_BY_GROUP.each do |group_name, team_names|
+TEAMS_BY_GROUP.each do |group_name, team_entries|
   group = Group.create!(name: group_name, tournament: tournament)
 
-  teams = team_names.map do |team_name|
-    Team.create!(name: team_name, group: group)
+  teams = team_entries.map do |team_name, team_code|
+    Team.create!(name: team_name, code: team_code, group: group)
   end
 
   # Round-robin: todas las combinaciones de 2 equipos (6 partidos).

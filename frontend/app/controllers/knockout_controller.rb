@@ -7,9 +7,10 @@ class KnockoutController < ApplicationController
     if tournament["status"] == "group_stage" || tournament["status"] == "setup"
       groups     = ApiClient.groups
       played     = played_group_matches(groups)
-      @locked    = true
-      @remaining = TOTAL_GROUP_MATCHES - played
-      @rounds    = []
+      @locked             = true
+      @remaining          = TOTAL_GROUP_MATCHES - played
+      @ready_to_advance   = @remaining == 0
+      @rounds             = []
       @champion  = nil
       @runner_up = nil
       @third     = nil

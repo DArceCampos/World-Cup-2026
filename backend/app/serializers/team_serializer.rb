@@ -12,6 +12,7 @@ class TeamSerializer
     {
       id: @team.id,
       name: @team.name,
+      code: @team.code,
       group_id: @team.group_id,
       points: @team.points,
       goals_for: @team.goals_for,
@@ -28,6 +29,6 @@ class TeamSerializer
   def self.brief(team)
     return nil if team.nil?
 
-    { id: team.id, name: team.name }
+    { id: team.id, name: team.name, code: team.code }
   end
 end

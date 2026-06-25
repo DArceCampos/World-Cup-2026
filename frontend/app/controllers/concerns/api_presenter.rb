@@ -83,13 +83,13 @@ module ApiPresenter
 
   def team_brief(api_team)
     return nil unless api_team
-    { code: team_code(api_team["name"]), name: api_team["name"] }
+    { code: api_team["code"].presence || team_code(api_team["name"]), name: api_team["name"] }
   end
 
   def build_standings_row(pos, team)
     dg = team["goal_difference"].to_i
     {
-      pos: pos, code: team_code(team["name"]), name: team["name"],
+      pos: pos, code: team["code"].presence || team_code(team["name"]), name: team["name"],
       pj: team["matches_played"].to_i,
       g:  team["wins"].to_i,
       e:  team["draws"].to_i,
@@ -138,8 +138,8 @@ module ApiPresenter
     {
       id:          api_match["id"],
       round_label: round_label,
-      home:        { code: team_code(home_team["name"]), name: home_team["name"] },
-      away:        { code: team_code(away_team["name"]), name: away_team["name"] },
+      home:        { code: home_team["code"].presence || team_code(home_team["name"]), name: home_team["name"] },
+      away:        { code: away_team["code"].presence || team_code(away_team["name"]), name: away_team["name"] },
       played:      played,
       home_goals:  home_goals,
       away_goals:  away_goals,
@@ -169,8 +169,8 @@ module ApiPresenter
       phase:        api_match["phase"],
       round_number: api_match["round_number"],
       played:       played,
-      home:         { code: team_code(home_team["name"]), name: home_team["name"] },
-      away:         { code: team_code(away_team["name"]), name: away_team["name"] },
+      home:         { code: home_team["code"].presence || team_code(home_team["name"]), name: home_team["name"] },
+      away:         { code: away_team["code"].presence || team_code(away_team["name"]), name: away_team["name"] },
       home_goals:   home_goals,
       away_goals:   away_goals,
       home_bg:      home_wins ? "rgba(255,212,0,.12)" : "transparent",

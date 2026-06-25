@@ -26,6 +26,7 @@ module Api
         if match.knockout?
           advancer = KnockoutAdvancer.new(match.tournament)
           next_created = advancer.advance!
+          advancer.propagate_winner_change(match) unless next_created
           mark_finished_if_needed(match.tournament)
         end
 

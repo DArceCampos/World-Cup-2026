@@ -6,6 +6,9 @@ class MatchesController < ApplicationController
     @status_filter = params[:status]
     @groups = LETTERS
 
+    tournament = ApiClient.tournament
+    @tournament_status = tournament["status"]
+
     api_status = case @status_filter
                  when "scheduled" then "scheduled"
                  when "played"    then "played"
@@ -21,6 +24,7 @@ class MatchesController < ApplicationController
     @matches = all.map { |m| build_match(m) }
   rescue StandardError
     @matches = []
+    @tournament_status = "group_stage"
   end
 
   def result

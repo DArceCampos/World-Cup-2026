@@ -69,6 +69,10 @@ module ApiClient
     post("/tournament/reset_groups", {})
   end
 
+  def self.reset_teams
+    post("/teams/reset_names", {})
+  end
+
   private
 
   def self.get(path)
@@ -99,7 +103,8 @@ module ApiClient
   def self.raise_if_error(resp)
     return if resp.is_a?(Net::HTTPSuccess)
     body = JSON.parse(resp.body) rescue nil
-    msg  = body.is_a?(Hash) ? body.dig("error", "message") : nil
+    err  = body.is_a?(Hash) ? body["error"] : nil
+    msg  = err.is_a?(Hash) ? err["message"] : err
     raise StandardError, msg || "Error HTTP #{resp.code}"
   end
 end

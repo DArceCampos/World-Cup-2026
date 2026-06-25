@@ -2,7 +2,7 @@
     Parámetros: rows (array), big (boolean para mostrar nombre completo) %>
 <div style="font-family:'Space Mono',monospace;font-size:<%= big ? '13px' : '11px' %>;color:#fff;width:100%;">
 
-  <div style="display:grid;grid-template-columns:2.1em minmax(0,1fr) 1.9em 1.7em 1.7em 1.7em 2.1em 2.1em 2.4em 2.6em;align-items:center;padding:0 .5em .55em;color:#6f6f99;font-size:.78em;letter-spacing:.04em;border-bottom:2px dotted #2A3FE5;">
+  <div style="display:grid;grid-template-columns:2.1em minmax(0,1fr) 2.2em 2.2em 2.2em 2.2em 2.5em 2.5em 2.8em 3em;align-items:center;padding:0 .5em .55em;color:#6f6f99;font-size:.78em;letter-spacing:.04em;border-bottom:2px dotted #2A3FE5;">
     <span>POS</span>
     <span>EQUIPO</span>
     <span style="text-align:center">PJ</span>
@@ -16,7 +16,7 @@
   </div>
 
   <% rows.each do |row| %>
-    <div style="display:grid;grid-template-columns:2.1em minmax(0,1fr) 1.9em 1.7em 1.7em 1.7em 2.1em 2.1em 2.4em 2.6em;align-items:center;padding:.55em .5em;border-left:3px solid <%= row[:accent] %>;background:<%= row[:bg] %>;border-bottom:1px dotted rgba(255,255,255,.07);">
+    <div style="display:grid;grid-template-columns:2.1em minmax(0,1fr) 2.2em 2.2em 2.2em 2.2em 2.5em 2.5em 2.8em 3em;align-items:center;padding:.55em .5em;border-left:3px solid <%= row[:accent] %>;background:<%= row[:bg] %>;border-bottom:1px dotted rgba(255,255,255,.07);">
       <span style="color:<%= row[:pos_color] %>;font-weight:700"><%= row[:pos] %></span>
       <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
         <span style="color:<%= row[:code_color] %>;font-weight:700;letter-spacing:.02em"><%= row[:code] %></span>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       # CRUD de grupos y equipos.
       resources :groups, only: %i[index show create update destroy]
       resources :teams,  only: %i[index show create update destroy]
+      post "teams/reset_names", to: "teams#reset_names"
 
       # Partidos: listado y registro de resultados.
       resources :matches, only: %i[index] do

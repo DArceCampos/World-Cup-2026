@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   post "admin/simulate_tournament", to: "admin#simulate_tournament", as: :admin_simulate_tournament
   post "admin/reset_groups",        to: "admin#reset_groups",        as: :admin_reset_groups
   patch "admin/teams/:id",    to: "admin#update_team",   as: :admin_team
+  post "admin/advance_knockout", to: "admin#advance_knockout", as: :admin_advance_knockout
+  post "admin/reset_teams",      to: "admin#reset_teams",      as: :admin_reset_teams
 end

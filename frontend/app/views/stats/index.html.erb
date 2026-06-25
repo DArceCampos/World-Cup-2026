@@ -20,7 +20,7 @@ window.STATS_DATA = <%= raw @stats_data %>;
     ranked.forEach(function(s,i) { s.rank = i + 1; });
     const withGames = all.filter(function(s) { return s.pj > 0; });
     const topAtt = all.slice().sort(function(a,b) { return b.gf-a.gf || b.dg-a.dg; }).slice(0, 5);
-    const topDef = withGames.slice().sort(function(a,b) { return a.gc-b.gc || b.dg-a.dg; }).slice(0, 5);
+    const topDef = withGames.slice().sort(function(a,b) { return (a.gc/a.pj)-(b.gc/b.pj) || b.dg-a.dg; }).slice(0, 5);
     var totalGoals = 0, mp = 0, draws = 0, biggest = null;
     (D.matches || []).forEach(function(m) {
       mp++; totalGoals += m.hg + m.ag;
@@ -86,9 +86,10 @@ window.STATS_DATA = <%= raw @stats_data %>;
 
     const topDefHTML = st.topDef.map((s, i) => {
       const color = i === 0 ? '#FFD400' : '#2A3FE5';
-      const mx = st.topDef[st.topDef.length - 1].gc;
-      const barPct = mx ? Math.round((1 - s.gc / (mx + 1)) * 100) + '%' : '100%';
-      return barRow(i+1, s.code, s.name, s.gc, ' GC', color, barPct);
+      const ratio = s.pj > 0 ? s.gc / s.pj : 0;
+      const maxRatio = st.topDef[st.topDef.length - 1].pj > 0 ? st.topDef[st.topDef.length - 1].gc / st.topDef[st.topDef.length - 1].pj : 1;
+      const barPct = maxRatio > 0 ? Math.round((1 - ratio / (maxRatio + 0.1)) * 100) + '%' : '100%';
+      return barRow(i+1, s.code, s.name, ratio.toFixed(2), ' GC/PJ', color, barPct);
     }).join('');
 
     const rankHTML = st.ranked.map(s => {

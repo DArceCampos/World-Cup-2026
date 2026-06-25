@@ -76,7 +76,53 @@ class KnockoutAdvancer
     true
   end
 
+  # Cuando una ronda siguiente ya existe y se re-registra un resultado,
+  # actualiza el equipo (ganador o perdedor) en el partido siguiente del bracket.
+  # También resetea ese partido a "scheduled" para que sea re-jugable.
+  def propagate_winner_change(match)
+    next_phase = NEXT_PHASE[match.phase]
+    return unless next_phase
+
+    new_winner = match.winner
+    new_loser  = match.loser
+    return unless new_winner
+
+    # round_number impar → home_team del partido siguiente; par → away_team
+    next_round = ((match.round_number.to_f) / 2).ceil
+    is_home    = match.round_number.odd?
+
+    if match.phase == "sf"
+      # Actualizar la final con el nuevo ganador
+      final_match = @tournament.matches.find_by(phase: "final", round_number: next_round)
+      if final_match
+        reset_next_match(final_match, is_home, new_winner)
+      end
+
+      # Actualizar el 3er lugar con el nuevo perdedor
+      third_match = @tournament.matches.find_by(phase: "3rd", round_number: next_round)
+      if third_match && new_loser
+        reset_next_match(third_match, is_home, new_loser)
+      end
+    else
+      next_match = @tournament.matches.find_by(phase: next_phase, round_number: next_round)
+      if next_match
+        reset_next_match(next_match, is_home, new_winner)
+      end
+    end
+  end
+
   private
+
+  def reset_next_match(next_match, is_home, new_team)
+    attrs = {
+      status: "scheduled",
+      home_goals: 0, away_goals: 0,
+      home_extra_goals: 0, away_extra_goals: 0,
+      home_penalties: 0, away_penalties: 0
+    }
+    attrs[is_home ? :home_team_id : :away_team_id] = new_team.id
+    next_match.update!(attrs)
+  end
 
   def all_groups_completed?
     @tournament.groups.all?(&:completed?)
