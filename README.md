@@ -91,3 +91,5 @@ El frontend queda disponible en `http://localhost:4000`.
 
 Ver [`docs/api-contracts.md`](docs/api-contracts.md) para ver todos los endpoints.  
 Colección Postman lista para importar en [`docs/World-Cup-2026.postman_collection.json`](docs/World-Cup-2026.postman_collection.json).
+Manual de usuario y docu completa: https://docs.google.com/document/d/1_q4N_G6uN2QjZRBPJ5DLm3cuWvbkg2v0EI6g85XtwH4/edit?tab=t.0
+
