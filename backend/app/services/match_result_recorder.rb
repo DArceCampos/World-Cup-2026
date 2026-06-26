@@ -1,7 +1,19 @@
+# MatchResultRecorder es el servicio más importante del sistema.
+# Su función es registrar el resultado de un partido y actualizar las
+# estadísticas de ambos equipos involucrados. Eso sí, sin este servicio
+# el sistema no podría llevar la tabla de posiciones correctamente —
+# los modelos no se actualizan solos, alguien tiene que hacerlo.
+#
+# El diseño intencional aquí es que el controlador no sabe nada de cómo
+# se calculan las estadísticas: simplemente llama a .call y delega.
 class MatchResultRecorder
+  # Puntos que se otorgan según el resultado del partido, según las reglas FIFA.
   POINTS_WIN  = 3
   POINTS_DRAW = 1
 
+  # Esta excepción propia se lanza cuando el resultado enviado no es válido
+  # (goles negativos, prórroga en grupos, etc.). Así el controlador puede
+  # capturarla y responder con un 422 sin mezclar lógica de validación.
   class InvalidResult < StandardError; end
 
   def initialize(match, params)
@@ -9,6 +21,13 @@ class MatchResultRecorder
     @params = params
   end
 
+  # Este método es el punto de entrada del servicio. Lo que hace es:
+  # 1. Si el partido ya estaba jugado, deshacer las estadísticas anteriores.
+  # 2. Asignar y validar el nuevo marcador.
+  # 3. Marcar el partido como jugado y guardarlo.
+  # 4. Actualizar las estadísticas de ambos equipos con el nuevo resultado.
+  # Todo ocurre dentro de una transacción para garantizar que si algo falla
+  # a mitad, los datos queden exactamente como estaban antes.
   def call
     ActiveRecord::Base.transaction do
       revert_team_stats if @match.played? && @match.group_phase?
@@ -25,6 +44,9 @@ class MatchResultRecorder
 
   private
 
+  # Este método asigna los valores del marcador al partido y luego valida
+  # que sean coherentes. Se llama .to_i en cada valor para convertir nil
+  # a 0 de forma segura si algún campo no viene en los parámetros.
   def assign_score
     @match.home_goals       = @params[:home_goals].to_i
     @match.away_goals       = @params[:away_goals].to_i
@@ -36,6 +58,10 @@ class MatchResultRecorder
     validate_score!
   end
 
+  # Este método lo que hace es verificar que el marcador sea válido.
+  # Hay dos reglas: los goles no pueden ser negativos, y en la fase de
+  # grupos no puede haber prórroga ni penales porque esas son reglas
+  # exclusivas de la fase eliminatoria.
   def validate_score!
     if @match.home_goals.negative? || @match.away_goals.negative?
       raise InvalidResult, "Los goles no pueden ser negativos"
@@ -54,8 +80,11 @@ class MatchResultRecorder
     @match.home_extra_goals.positive? || @match.away_extra_goals.positive?
   end
 
-  # Deshace la contribución del resultado anterior sobre las estadísticas
-  # de ambos equipos antes de aplicar el nuevo marcador.
+  # Este método lo que hace es deshacer el impacto del resultado anterior
+  # sobre las estadísticas de ambos equipos. Se necesita porque si alguien
+  # corrige el resultado de un partido ya jugado, hay que primero restar
+  # lo que se sumó antes para luego aplicar el nuevo resultado limpiamente.
+  # Eso sí, sin este paso una corrección duplicaría o mezclaría estadísticas.
   def revert_team_stats
     home = @match.home_team
     away = @match.away_team
@@ -75,6 +104,8 @@ class MatchResultRecorder
     away.save!
   end
 
+  # Este método aplica el nuevo resultado a las estadísticas de ambos equipos.
+  # Primero actualiza goles para los dos, y luego aplica puntos según quién ganó.
   def update_team_stats
     home = @match.home_team
     away = @match.away_team
@@ -94,6 +125,8 @@ class MatchResultRecorder
     away.save!
   end
 
+  # Suma goles y partidos jugados al equipo. La diferencia de goles se
+  # recalcula siempre desde cero para evitar acumulación de errores.
   def apply_goals(team, scored:, conceded:)
     team.matches_played   += 1
     team.goals_for        += scored
@@ -101,6 +134,7 @@ class MatchResultRecorder
     team.goal_difference   = team.goals_for - team.goals_against
   end
 
+  # Hace lo opuesto de apply_goals — descuenta goles y partidos jugados.
   def revert_goals(team, scored:, conceded:)
     team.matches_played   -= 1
     team.goals_for        -= scored
@@ -108,6 +142,9 @@ class MatchResultRecorder
     team.goal_difference   = team.goals_for - team.goals_against
   end
 
+  # Los siguientes seis métodos aplican o revierten el resultado (W/D/L)
+  # y los puntos correspondientes para un equipo. Están separados en métodos
+  # pequeños para que update_team_stats y revert_team_stats sean legibles.
   def register_win(team)
     team.wins   += 1
     team.points += POINTS_WIN
